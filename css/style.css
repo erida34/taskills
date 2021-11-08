@@ -1,0 +1,68 @@
+/* FONTS */
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
+/* ROOT */
+:root {
+    --main-color-f: #fff;
+    --main-color-s: #000;
+    --second-color: blue;
+}
+
+/* STANDART STYLES */
+body {
+    font-family: "Roboto";
+    line-height: 1.2;
+    font-size: 16px;
+}
+
+.small-text {
+    font-size: 0.825rem;
+}
+
+.normal-text {
+    font-size: 1rem;
+}
+
+.small-title {
+    font-size: 1.125rem;
+}
+
+.middle-title {
+    font-size: 1.25rem;
+}
+
+.big-title {
+    font-size: 1.5rem;
+}
+
+.biggest-title {
+    font-size: 4rem;
+}
+
+/* STANDART BLOCK'S STYLES*/
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.section{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    max-width: 1100px;
+    width: 100%;
+}
+
+
+/* MENU */
