@@ -1,41 +1,200 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Главная</title>
-</head>
-<body>
-    <header>
-        <section class="section">
-            <nav class="container">
-                <ul class="menu">
-                    <li class="menu__link"><a href=""></a></li>
-                    <li class="menu__link"><a href=""></a></li>
-                    <li class="menu__link"><a href=""></a></li>
-                    <li class="menu__link"><a href=""></a></li>
-                    <li class="menu__link"><a href=""></a></li>
-                </ul>
-            </nav>
-        </section>
-    </header>
-    <main>
-        <section class="section">
-            <div class="container">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>Главная</title>
+    </head>
+    <body>
+        <header>
+            <!-- Section MENU -->
+            <section class="section section_menu">
+                <nav class="container">
+                    <ul class="flex menu">
+                        <div class="flex menu_left">
+                            <li>
+                                <a class="menu__link midi-text" href="">Места</a>
+                            </li>
+                            <li>
+                                <a class="menu__link midi-text" href="">Маршруты</a>
+                            </li>
+                        </div>
+                        <li>
+                            <button class="menu__link midi-text btn btn_acc">Аккаунт</button>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <!-- Section MENU -->
+        </header>
+        <main>
+            <!-- Section SEARCH -->
+            <section class="section section_search">
+                <div class="container">
+                    <form action="" class="form-search">
+                        <input type="text" placeholder="Поиск места" class="small-text input-search" />
+                        <div class="flex flex-cen block-search">
+                            <button type="submit" class="btn btn-search"></button>
+                        </div>
+                    </form>
 
+                    <button class="btn swap-search">Поиск по #</button>
+                    <!-- При нажатии на свап-->
+                    <!-- <form action="" class="form-search">
+                        <input type="text" placeholder="Поиск по #" class="input-search" />
+                        <button type="submit" class="btn btn-search"></button>
+                    </form>
+                    <button class="swap-search">Поиск места</button> -->
+                </div>
+            </section>
+            <!-- Section SEARCH -->
+
+            <!-- Section CARDS -->
+            <section class="section">
+                <div class="container">
+                    <div class="flex cards-wrapper">
+                        <div class="flex flex-col card">
+                            <img
+                                src="https://info-travels.ru/wp-content/uploads/2020/02/lipeck.jpg"
+                                alt=""
+                                class="card__img"
+                            />
+                            <div class="card__content">
+                                <h2 class="small-title midi-text card__title">Название</h2>
+                                <p class="small-text card__descr">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid repellendus
+                                    aperiam odit ipsum similique, corrupti nihil earum vitae...
+                                </p>
+                                <button class="small-text midi-text see-more">Смотреть</button>
+                            </div>
+                        </div>
+                        <div class="flex flex-col card">
+                            <img src="" alt="" class="card__img" />
+                            <div class="card__content">
+                                <h2 class="small-title midi-text card__title">Название</h2>
+                                <p class="small-text card__descr">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid repellendus
+                                    aperiam odit ipsum similique, corrupti nihil earum vitae...
+                                </p>
+                                <button class="small-text midi-text see-more">Смотреть</button>
+                            </div>
+                        </div>
+                        <div class="flex flex-col card">
+                            <img src="" alt="" class="card__img" />
+                            <div class="card__content">
+                                <h2 class="small-title midi-text card__title">Название</h2>
+                                <p class="small-text card__descr">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid repellendus
+                                    aperiam odit ipsum similique, corrupti nihil earum vitae...
+                                </p>
+                                <button class="small-text midi-text see-more">Смотреть</button>
+                            </div>
+                        </div>
+                        <div class="flex flex-col card">
+                            <img src="" alt="" class="card__img" />
+                            <div class="card__content">
+                                <h2 class="small-title midi-text card__title">Название</h2>
+                                <p class="small-text card__descr">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed aliquid repellendus
+                                    aperiam odit ipsum similique, corrupti nihil earum vitae...
+                                </p>
+                                <button class="flex flex-cen small-text midi-text see-more">Смотреть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section CARDS -->
+
+            <!-- MODAL window Register/ Log in -->
+            <div class="flex-cen modal-wrap">
+                <div class="flex flex-col flex-cen modal-window">
+                    <div class="tabs tabs_acc">
+                        <!-- Кнопки -->
+                        <ul class="tabs-nav tabs-nav-acc">
+                            <li><a class="tab_acc" href="#log">Регистрация</a></li>
+                            <li><a class="tab_acc" href="#reg">Авторизация</a></li>
+                        </ul>
+
+                        <!-- Контент -->
+                        <div class="tabs-items tab_acc">
+                            <div class="tabs-item" id="log">
+                                <form class="flex flex-col flex-cen modal_form" action="clients.html">
+                                    <div class="flex input_box">
+                                        <input
+                                            type="text"
+                                            name="login"
+                                            minlength="3"
+                                            maxlength="20"
+                                            placeholder="Введите логин"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="flex input_box">
+                                        <input
+                                            type="text"
+                                            name="password"
+                                            maxlength="20"
+                                            class="password_input"
+                                            placeholder="Введите пароль"
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" class="btn_send disabled">Войти</button>
+                                </form>
+                            </div>
+                            <div class="tabs-item" id="reg">
+                                <form class="modal_form" action="clients.html">
+                                    <div class="flex input_box">
+                                        <input
+                                            type="text"
+                                            name="login"
+                                            maxlength="20"
+                                            placeholder="Введите логин"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="flex input_box">
+                                        <input
+                                            type="text"
+                                            name="password"
+                                            minlength="3"
+                                            maxlength="20"
+                                            class="password_input"
+                                            placeholder="Введите пароль"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="flex input_box">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            minlength="3"
+                                            maxlength="30"
+                                            placeholder="Ваша почта"
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" class="btn_send disabled">Зарегистрироваться</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
-    <footer>
-        <section class="section section_footer">
-            <div class="container">
+            <!-- MODAL window Register/ Log in -->
+        </main>
+        <footer>
+            <section class="section section_footer">
+                <div class="container">
                     <p class="name-org"></p>
-            </div>
-        </section>
-    </footer>
-    <script src="js/jquery-3.6.0.min.js"></script>
-</body>
+                </div>
+            </section>
+        </footer>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
 </html>

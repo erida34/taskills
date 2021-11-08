@@ -96,8 +96,9 @@ video {
     box-sizing: border-box;
 }
 
-a{
+a {
     outline: none !important;
+    text-decoration: none;
 }
 
 /* make sure to set some focus styles for accessibility */
