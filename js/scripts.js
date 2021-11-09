@@ -1,12 +1,12 @@
 // Скрипт появления скрытия кнопки войти / зарегистрироваться
 
 $(".btn_acc").click(function(){
-    $(".modal-wrap").css({ display: "flex" });
+    $(".modal-wrap").addClass("flex");
 });
 
 // Скрипт перемещения по табам
 $(function () {
-    var tab = $(".tabs .tabs-items > div");
+    var tab = $(".tabs-items > div");
     tab.hide().filter(":first").show();
 
     // Клики по вкладкам.
