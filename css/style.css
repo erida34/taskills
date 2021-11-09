@@ -92,6 +92,7 @@ body {
 
 .menu__link {
     color: var(--main-color-f);
+    background: var(--main-color-s);
     margin-right: 20px;
 }
 
@@ -129,6 +130,11 @@ body {
 
 .btn {
     border: 0;
+    padding: 3px 20px;
+    line-height: 28px;
+    background: var(--main-color-s);
+    color: var(--main-color-f);
+    border-radius: 8px;
 }
 
 .btn-search {
@@ -136,6 +142,7 @@ body {
     height: 21px;
     background: url("../images/icons/search1.png");
     background-size: cover;
+    padding: 0;
 }
 
 .swap-search {
@@ -177,15 +184,9 @@ body {
     margin-bottom: 20px;
 }
 
-.see-more {
+.btn_more {
     width: 100%;
-    padding: 3px 0;
     margin-bottom: 20px;
-    line-height: 28px;
-    background: var(--main-color-s);
-    color: var(--main-color-f);
-    border: 0;
-    border-radius: 8px;
 }
 
 /* TABS STYLE  */
@@ -209,7 +210,6 @@ body {
 .tabs-nav a {
     display: block;
     padding: 10px 20px;
-    border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-left: 1px solid #ccc;
     background: #fbfbfb;
@@ -236,7 +236,7 @@ body {
 }
 
 .tabs-items {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 0 5px 5px 5px;
     background: #fff;
     margin: -1px 0 0 0;
@@ -245,6 +245,18 @@ body {
 .tabs-item {
     padding: 15px;
 }
+
+
+/* TABS ONLINE SECOND MENU */
+.tabs_sec-menu {
+}
+.tabs-nav_sec-menu {
+}
+.tab-nav_sec-menu {
+}
+
+
+
 
 /* REGISTER & LOGIN & MODAL POPUP */
 .modal-wrap {
@@ -259,12 +271,19 @@ body {
 
 .modal-window {
     width: 36%;
-    height: 320px;
+    height: 250px;
     background: var(--main-color-f);
     border-radius: 14px;
     -webkit-filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.1));
     filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.2));
     /* border: 1px solid #c9c9c9; */
+}
+
+.tabs-nav_acc {
+}
+
+.tab-nav_acc {
+    width: 50%;
 }
 
 .tabs_acc {
@@ -275,30 +294,33 @@ body {
 .tabs-items_acc {
 }
 
-.tabs-nav-acc {
+.input_box-wrapper {
+    width: 100%;
+}
+
+.input_box-wrapper_log {
+    margin-bottom: 0px;
+    padding-top: 25px;
 }
 
 .input_box {
     width: 100%;
     position: relative;
-    padding: 0px 12% 10%;
+    padding: 0px 18% 20px;
 }
 
 .input_box input {
     width: 100%;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 4% 1%;
+    padding: 10px 1%;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-top: none;
-    border-right: none;
-    border-left: none;
+    border: 0;
     -o-border-image: initial;
     border-image: initial;
     outline: none;
     font: 500 1rem Manrope, sans-serif;
     border-bottom: 1px solid rgb(199, 207, 207);
-    color: rgb(28, 46, 53);
 }

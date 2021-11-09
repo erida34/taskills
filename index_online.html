@@ -31,6 +31,26 @@
             <!-- Section MENU -->
         </header>
         <main>
+            <section class="section section_sec-menu">
+                <div class="container">
+                    <div class="tabs tabs_sec-menu">
+                        <!-- Кнопки -->
+                        <ul class="tabs-nav tabs-nav_sec-menu">
+                            <li class="tab-nav_sec-menu"><a href="#my-cards">Регистрация</a></li>
+                            <li class="tab-nav_sec-menu"><a href="#other">Авторизация</a></li>
+                        </ul>
+
+                        <!-- Контент -->
+                        <div class="tabs-items tabs_sec-menu">
+                            <div class="tabs-item tabs_sec-menu" id="my-cards">
+                            </div>
+                            <div class="tabs-item tabs_sec-menu" id="other">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section SEARCH -->
             <section class="section section_search">
                 <div class="container">
@@ -184,6 +204,8 @@
                                             <input
                                                 type="email"
                                                 name="email"
+                                                minlength="3"
+                                                maxlength="30"
                                                 placeholder="Ваша почта"
                                                 required
                                             />
