@@ -1,8 +1,16 @@
-// Скрипт появления скрытия кнопки войти / зарегистрироваться
-
-$(".btn_acc").click(function(){
-    $(".modal-wrap").addClass("flex");
+// Скрипт появления скрытия окна войти / зарегистрироваться
+$(".btn_acc").click(function () {
+    $(".modal-wrap_acc").addClass("display-flex");
+    $(".modal-window_acc").addClass("display-flex");
 });
+
+
+// Скрипт закрытия модальных окон
+$(".btn_close").click(function () {
+    $(".modal-wrap").removeClass("display-flex");
+    $(".modal-window").removeClass("display-flex");
+});
+
 
 // Скрипт перемещения по табам
 $(function () {
@@ -37,4 +45,25 @@ $("form input[type=email]").on("input", function () {
             $(".btn_send").addClass("disabled");
         }
     }
-}); // email check
+});
+
+
+// Выпадающее меню
+$(".drop-menu").hide();
+$(".drop-menu__link").click(function () {
+    if ($(".drop-menu").hasClass("active")) {
+        setTimeout(function () {
+            $(".drop-menu").removeClass("active");
+            $(".menu__arrow").removeClass("rotate");
+            $(".drop-menu").hide();
+        }, 100);
+    } else {
+        setTimeout(function () {
+            $(".drop-menu").show();
+            $(".drop-menu").addClass("active");
+            $(".menu__arrow").addClass("rotate");
+        }, 100);
+    }
+});
+
+

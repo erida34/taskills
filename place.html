@@ -1,23 +1,117 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Места</title>
-</head>
-<body>
-    <header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>Какое-то конкретное место</title>
+    </head>
+    <body>
+        <header>
+            <!-- Section MENU -->
+            <section class="section section_menu">
+                <nav class="container">
+                    <ul class="flex menu">
+                        <li>
+                            <a class="menu__link menu__link_r aver-text" href="index.html">Места</a>
+                            <a class="menu__link aver-text" href="routes.html">Маршруты</a>
+                        </li>
+                        <li>
+                            <button class="menu__link aver-text drop-menu__link">
+                                Login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" />
+                            </button>
+                            <ul class="drop-menu">
+                                <li class="btn_menu btn_change-pass">
+                                    <img src="images/icons/key.png" alt="" class="btn_menu__img" />
+                                    <span class="small-text midi-text">Сменить пароль</span>
+                                </li>
+                                <li class="btn_menu btn_exit">
+                                    <img src="images/icons/logout.png" alt="" class="btn_menu__img" />
+                                    <span class="small-text midi-text">Выйти</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <!-- Section MENU -->
+        </header>
+        <main>
+            <!-- Section CARDS -->
+            <section class="section section_top">
+                <div class="flex container container_place">
+                    <div class="place__content">
+                        <div class="flex flex-cen mb-20 place__header">
+                            <h1 class="biggest-title aver-text place__name">Памятное место</h1>
+                            <button class="user_actions user_actions_red">
+                                <img src="images/icons/pencil.png" />
+                            </button>
+                            <!-- <button class="user_actions user_actions_add">
+                                <img src="images/icons/add.png"/>
+                            </button> -->
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="small-title place__info">Информация</span>
+                            <div class="place__info-block">
+                                <span class="aver-text place__info-prew">Адрес:</span>
+                                <span class="aver-text place__adress">г. Липецк, ул.Терешковой 22/4</span>
+                            </div>
+                            <div class="place__info-block">
+                                <span class="aver-text place__info-prew">Координаты:</span>
+                                <span class="midi-text place__coord">52.614425, 39.568686</span>
+                            </div>
+                            <div class="place__info-block">
+                                <span class="flex aver-text small-title place__info-prew">Описание</span>
+                                <p class="text__descr">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ab quibusdam a
+                                    explicabo fuga, unde nesciunt veniam autem ipsam odit excepturi cumque inventore,
+                                    nam molestiae illo voluptas beatae, sunt molestias! Distinctio, numquam cum velit
+                                    consequuntur repellendus quod ipsa incidunt aspernatur provident dignissimos.
+                                    Cupiditate eaque aut nihil quisquam vel iure, magni hic distinctio ipsum, vitae
+                                    placeat pariatur repellendus, dignissimos harum beatae? Qui eum ex incidunt adipisci
+                                    quos in.
+                                </p>
 
-    </header>
-    <main>
-
-    </main>
-    <footer>
-
-    </footer>
-    <script src="js/jquery-3.6.0.min.js"></script>
-</body>
+                                <p class="text__descr">
+                                    Laborum dolorum quisquam iusto illum eius laboriosam quis quae eaque porro
+                                    voluptatem! Corrupti ut eius tempore animi delectus amet rerum neque voluptas
+                                    facere! Consequuntur commodi veniam dicta culpa fuga assumenda odio nesciunt. Porro
+                                    quod reprehenderit tempora, rem qui velit obcaecati dignissimos impedit alias,
+                                    officia esse amet. Facere cumque rem ullam molestiae suscipit aperiam! Dignissimos
+                                    suscipit possimus, ex earum officia libero ab unde, voluptatibus dolores similique
+                                    nulla doloribus dolorem? Corporis quidem repudiandae earum, ex odio itaque
+                                    laboriosam mollitia odit doloribus reprehenderit corrupti nobis sed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="place__images">
+                        <img
+                            src="http://kassamix.ru/assets/images/resources/1191/zvezdny-na-glavnoi.jpg"
+                            alt=""
+                            class="place__img"
+                        />
+                        <img
+                            src="https://vesti-lipetsk.ru/images/news/2019/10/3/proekt1_1.jpg"
+                            alt=""
+                            class="place__img"
+                        />
+                        <img src="" alt="" class="place__img" />
+                    </div>
+                </div>
+            </section>
+            <!-- Section CARDS -->
+        </main>
+        <footer>
+            <section class="section section_footer">
+                <div class="container">
+                    <p class="name-org"></p>
+                </div>
+            </section>
+        </footer>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
 </html>

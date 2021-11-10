@@ -32,9 +32,9 @@
                 <div class="container">
                     <form action="" class="form-search">
                         <input type="text" placeholder="Поиск места" class="small-text input-search" />
-                        <div class="flex flex-cen block-search">
-                            <button type="submit" class="btn btn-search"></button>
-                        </div>
+                        <button type="submit" class="flex flex-cen btn btn-search">
+                            <img src="images/icons/search1.png" />
+                        </button>
                     </form>
 
                     <button class="btn swap-search">Поиск по #</button>
@@ -180,11 +180,16 @@
             <!-- Section CARDS -->
 
             <!-- MODAL window Register/ Log in -->
-            <div class="flex-cen modal-wrap">
-                <div class="flex flex-col flex-cen modal-window">
+            <div class="flex-cen modal-wrap modal-wrap_acc">
+                <!-- <div class="flex flex-col flex-cen "> -->
+
+                <div class="flex flex-col flex-cen modal-window modal-window_acc">
+                    <button class="btn_close">
+                        <img src="images/icons/close.png" />
+                    </button>
                     <div class="tabs tabs_acc">
                         <!-- Кнопки -->
-                        <ul class="tabs-nav tabs-nav_acc">
+                        <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
                             <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
                             <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
                         </ul>
@@ -192,7 +197,7 @@
                         <!-- Контент -->
                         <div class="tabs-items tabs_acc">
                             <div class="tabs-item tabs_acc" id="log">
-                                <form class="flex flex-col flex-cen modal_form">
+                                <form class="flex flex-col flex-cen modal_form modal_form_reg">
                                     <div class="input_box-wrapper input_box-wrapper_log">
                                         <div class="flex input_box">
                                             <input
@@ -215,7 +220,7 @@
                                             />
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn_enter small-text midi-text disabled">
+                                    <button type="submit" class="btn mb-20 btn_enter small-text midi-text disabled">
                                         Войти
                                     </button>
                                 </form>
@@ -243,11 +248,11 @@
                                                 required
                                             />
                                         </div>
-                                        <div class="flex input_box">
+                                        <div class="flex input_box mb-20">
                                             <input type="email" name="email" placeholder="Ваша почта" required />
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn_send small-text midi-text disabled">
+                                    <button type="submit" class="btn mb-20 btn_send small-text midi-text disabled">
                                         Зарегистрироваться
                                     </button>
                                 </form>
@@ -255,8 +260,27 @@
                         </div>
                     </div>
                 </div>
+                <!-- </div> -->
             </div>
             <!-- MODAL window Register/ Log in -->
+
+            <!-- MODAL window Send Code -->
+            <div class="flex-cen modal-wrap modal-wrap_code">
+                <div class="flex flex-col flex-cen modal-window modal-window_code">
+                    <button class="btn_close">
+                        <img src="images/icons/close.png" />
+                    </button>
+                    <p class="midi-text middle-title mb-20 modal__title">Завершение регистрации</p>
+                    <p class="mb-20 modal__text">На вашу почту был выслан код подтверждения</p>
+                    <form class="flex flex-col flex-cen modal__form" action="#">
+                        <div class="input_box">
+                            <input type="number" name="cod" maxlength="5" placeholder="Код" required />
+                        </div>
+                        <button type="submit" class="btn small-text midi-text">Подтвердить</button>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL window Send Code -->
         </main>
         <footer>
             <section class="section section_footer">

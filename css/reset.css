@@ -101,6 +101,10 @@ a {
     text-decoration: none;
 }
 
+button {
+    border: 0;
+}
+
 /* make sure to set some focus styles for accessibility */
 :focus {
     outline: 0;
