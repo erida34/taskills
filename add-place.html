@@ -1,23 +1,148 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Добавить место</title>
-</head>
-<body>
-    <header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>Места</title>
+    </head>
+    <body>
+        <header>
+            <!-- Section MENU -->
+            <section class="section section_menu">
+                <nav class="container">
+                    <ul class="flex menu">
+                        <li>
+                            <a class="menu__link menu__link_r text_aver" href="index.html">Места</a>
+                            <a class="menu__link text_aver" href="routes.html">Маршруты</a>
+                        </li>
+                        <li>
+                            <button class="menu__link text_aver drop-menu__link">
+                                Login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" />
+                            </button>
+                            <ul class="drop-menu">
+                                <li class="btn_menu btn_change-pass">
+                                    <img src="images/icons/key.png" alt="" class="btn_menu__img" />
+                                    <span class="text_small midi-text">Сменить пароль</span>
+                                </li>
+                                <li class="btn_menu btn_exit">
+                                    <img src="images/icons/logout.png" alt="" class="btn_menu__img" />
+                                    <span class="text_small midi-text">Выйти</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <!-- Section MENU -->
+        </header>
+        <main>
+            <!-- Section ADD Form-->
+            <section class="section section_top">
+                <div class="container">
+                    <form action="">
+                        <div class="flex input-box input-box_add">
+                            <input type="text" name="placename" placeholder="Название памятного места" required />
+                        </div>
+                        <div class="flex input-box input-box_add">
+                            <input type="text" name="adress" placeholder="Адрес" required />
+                        </div>
+                        <div class="flex input-box input-box_add">
+                            <input type="text" name="coord" placeholder="Координаты" required />
+                        </div>
+                        <div class="flex input-box input-box_add">
+                            <textarea type="text" name="descr" placeholder="Описание" required></textarea>
+                        </div>
 
-    </header>
-    <main>
+                        <input
+                            type="hidden"
+                            name="csrfmiddlewaretoken"
+                            value="ZNXFg31h5ZAlsxsclSP8II10CNApfMm088htQAsq6ekHvC2IZxmx413fFeLIzRa2"
+                        />
 
-    </main>
-    <footer>
+                        <div class="file-upload">
+                            <label class="form-label" for="id_ct_image">Выберите файл </label>
+                            <input
+                                type="file"
+                                name="ct_image"
+                                class="uploaded-file"
+                                id="id_ct_image"
+                            />
+                        </div>
 
-    </footer>
-    <script src="js/jquery-3.6.0.min.js"></script>
-</body>
+                        <div id="preview"></div>
+                        <button type="submit">Добавить</button>
+                    </form>
+                    <button class="add-form">+</button>
+                </div>
+            </section>
+            <!-- Section ADD Form -->
+
+            <!-- MODAL window Change password -->
+            <div class="flex-cen modal-wrap modal-wrap_change">
+                <div class="flex flex-col flex-cen modal-window modal-window_change">
+                    <button class="btn_close">
+                        <img src="images/icons/close.png" />
+                    </button>
+                    <p class="text_midi title_middle mb-20 modal__title">Сменить пароль</p>
+                    <form class="flex flex-col flex-cen modal_form">
+                        <div class="input-box-wrapper">
+                            <div class="flex input-box input-box_change">
+                                <input type="text" name="oldpass" minlength="3" placeholder="Старый пароль" required />
+                            </div>
+                            <div class="flex input-box input-box_change">
+                                <input
+                                    type="text"
+                                    name="newpass"
+                                    minlength="3"
+                                    maxlength="20"
+                                    class="password_input"
+                                    placeholder="Новый пароль"
+                                    required
+                                />
+                            </div>
+                            <div class="flex input-box input-box_change mb-20">
+                                <input
+                                    type="text"
+                                    name="repnewpass"
+                                    minlength="3"
+                                    placeholder="Повторите пароль"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn mb-20 btn_change text_small text_midi disabled">
+                            Сменить
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL window Change password -->
+
+            <!-- MODAL window Exit -->
+            <div class="flex-cen modal-wrap modal-wrap_exit">
+                <div class="flex flex-col flex-cen modal-window">
+                    <button class="btn_close">
+                        <img src="images/icons/close.png" />
+                    </button>
+                    <p class="text_midi title_middle mb-20 modal__title">Вы действительно хотите выйти?</p>
+                    <form class="flex flex-col flex-cen modal__form" action="#">
+                        <button type="submit" class="btn text_small midi-text">Выйти</button>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL window Exit -->
+        </main>
+        <footer>
+            <section class="section section_footer">
+                <div class="container">
+                    <p class="name-org"></p>
+                </div>
+            </section>
+        </footer>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
 </html>
