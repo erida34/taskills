@@ -49,30 +49,41 @@
                         <div class="flex input-box input-box_add">
                             <input type="text" name="adress" placeholder="Адрес" required />
                         </div>
-                        <div class="flex input-box input-box_add">
+                        <div class="flex input-box input-box_add input-box_add_short">
                             <input type="text" name="coord" placeholder="Координаты" required />
                         </div>
                         <div class="flex input-box input-box_add">
-                            <textarea type="text" name="descr" placeholder="Описание" required></textarea>
+                            <textarea
+                                class="input-descr"
+                                type="text"
+                                name="descr"
+                                placeholder="Описание"
+                                required
+                            ></textarea>
                         </div>
 
-                        <input
-                            type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value="ZNXFg31h5ZAlsxsclSP8II10CNApfMm088htQAsq6ekHvC2IZxmx413fFeLIzRa2"
-                        />
-
-                        <div class="file-upload">
-                            <label class="form-label" for="id_ct_image">Выберите файл </label>
-                            <input
-                                type="file"
-                                name="ct_image"
-                                class="uploaded-file"
-                                id="id_ct_image"
-                            />
+                        <!-- вставка картинок -->
+                        <div class="flex input-box input-box_add">
+                            <input type="hidden" name="image1" />
                         </div>
 
-                        <div id="preview"></div>
+                        <div>
+                            <input type="file" id="img" multiple accept="image/*" name="img" />
+                        </div>
+                        <div>
+                            <img id="img-preview" src="default-preview.jpg" />
+                            <a href="#" id="reset-img-preview">удалить изображения</a>
+                        </div>
+                        <div>
+                            <img id="img-preview" src="default-preview.jpg" />
+                        </div>
+
+                        <!-- <div class="file-upload">
+                            <label class="form-label" for="id_image">Выберите файл </label>
+                            <input type="file" name="image" class="uploaded-file" id="id_image" />
+                        </div>
+
+                        <div id="preview"></div>-->
                         <button type="submit">Добавить</button>
                     </form>
                     <button class="add-form">+</button>
@@ -144,5 +155,41 @@
         </footer>
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/scripts.js"></script>
+        <script>
+            $("#img").change(function () {
+                var input = $(this)[0];
+                if (input.files && input.files[0]) {
+                    if (input.files[0].type.match("image.*")) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#img-preview").attr("src", e.target.result);
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        console.log("ошибка, не изображение");
+                    }
+                } else {
+                    console.log("хьюстон у нас проблема");
+                }
+            });
+
+            $("#reset-img-preview").click(function () {
+                $("#img").val("");
+                $("#img-preview").attr("src", "default-preview.jpg");
+            });
+
+            $("#form").bind("reset", function () {
+                $("#img-preview").attr("src", "default-preview.jpg");
+            });
+
+            $("#reset-img-preview").click(function () {
+                $("#img").val("");
+                $("#img-preview").attr("src", "default-preview.jpg");
+            });
+
+            $("#form").bind("reset", function () {
+                $("#img-preview").attr("src", "default-preview.jpg");
+            });
+        </script>
     </body>
 </html>
