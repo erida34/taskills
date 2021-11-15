@@ -1,3 +1,27 @@
+<?php
+    
+	include_once("db.php");
+	if(isset($_SESSION['user_id'])){
+        $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
+        $userdata = mysqli_fetch_assoc($query);
+        
+    }
+
+    if(isset($_SESSION['user_id'])){
+        $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
+        $userdata = mysqli_fetch_assoc($query);
+        // if($userdata["verification"] == 0){
+        //     header("Location: index.php"); exit();
+        // }
+        $_SESSION["login"] = $userdata["login"];
+        $login = $userdata["login"];
+        $email = $userdata["email"];
+        $query = mysqli_query($link ,"SELECT *,COUNT(id) FROM `places` WHERE `id_user`='".intval($_SESSION['user_id'])."' GROUP BY `id`;");
+        $userdata = mysqli_fetch_assoc($query);
+        // $count = $userdata["COUNT(id)"];
+    }
+ ?>
+
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -15,8 +39,8 @@
                 <nav class="container">
                     <ul class="flex menu">
                         <li>
-                            <a class="menu__link menu__link_r text_aver" href="index.html">Места</a>
-                            <a class="menu__link text_aver" href="routes.html">Маршруты</a>
+                            <a class="menu__link menu__link_r text_aver" href="index.php">Места</a>
+                            <a class="menu__link text_aver" href="routes.php">Маршруты</a>
                         </li>
                         <li>
                             <button class="menu__link text_aver drop-menu__link">
@@ -51,10 +75,6 @@
                         <button class="user_actions user_actions_red">
                             <img src="images/icons/pencil.png" />
                         </button>
-
-                        <!-- <button class="user_actions user_actions_add">
-                                <img src="images/icons/add.png"/>
-                            </button> -->
                     </div>
 
                     <div class="title_small info mb-20">Информация</div>
@@ -203,6 +223,110 @@
             </section>
             <!-- Section CARDS -->
 
+            <!-- MODAL window Register/ Log in -->
+            <div class="flex-cen modal-wrap modal-wrap_acc">
+                <!-- <div class="flex flex-col flex-cen "> -->
+
+                <div class="flex flex-col flex-cen modal-window modal-window_acc">
+                    <button class="btn_close">
+                        <img src="images/icons/close.png" />
+                    </button>
+                    <div class="tabs tabs_acc">
+                        <!-- Кнопки -->
+                        <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
+                            <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+                            <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
+                        </ul>
+
+                        <!-- Контент -->
+                        <div class="tabs-items tabs_acc" id="wind_log_reg">
+                            <div class="tabs-item tabs_acc" id="log">
+                                <form method="post" action="index.php" class="flex flex-col flex-cen modal_form modal_form_reg">
+                                    <div class="input-box-wrapper input-box-wrapper_log">
+                                        <div class="flex input-box">
+                                            <input
+                                                type="text"
+                                                name="login"
+                                                minlength="3"
+                                                maxlength="20"
+                                                placeholder="Введите логин"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="flex input-box">
+                                            <input
+                                                type="text"
+                                                name="password"
+                                                maxlength="20"
+                                                class="password_input"
+                                                placeholder="Введите пароль"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <button type="submit" name="submit" class="btn mb-20 btn_enter text_small text_midi  disabled">
+                                        Войти
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="tabs-item tabs_acc" id="reg">
+                                <form name="reg" method="POST" class="flex flex-col flex-cen modal_form">
+                                    <div class="input-box-wrapper">
+                                        <div class="flex input-box">
+                                            <input
+                                                type="text"
+                                                name="login"
+                                                maxlength="20"
+                                                placeholder="Введите логин"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="flex input-box">
+                                            <input
+                                                type="text"
+                                                name="password"
+                                                minlength="3"
+                                                maxlength="20"
+                                                class="password_input"
+                                                placeholder="Введите пароль"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="flex input-box mb-20">
+                                            <input type="email" name="email" placeholder="Ваша почта" required />
+                                        </div>
+                                    </div>
+                                    <button id="reg-btn" name="submit" type="button" class="btn mb-20 btn_send text_small text_midi  disabled">
+                                        Зарегистрироваться
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+            <!-- MODAL window Register/ Log in -->
+
+            <!-- MODAL window Send Code -->
+            <div class="flex-cen modal-wrap modal-wrap_code">
+                <div class="flex flex-col flex-cen modal-window modal-window_code">
+                    <button class="btn_close">
+                        <img src="images/icons/close.png" />
+                    </button>
+                    <p class="text_midi  title_middle mb-20 modal__title">Завершение регистрации</p>
+                    <p class="mb-20 modal__text">На вашу почту был выслан код подтверждения</p>
+                    <form name="verif" class="flex flex-col flex-cen modal__form" action="#">
+                        <div class="input-box">
+                            <input type="number" name="cod" maxlength="5" placeholder="Код" required />
+                        </div>
+                        <button type="button" id="verif-btn" class="btn text_small midi-text">Подтвердить</button>
+                    </form>
+                </div>
+            </div>
+            <!-- MODAL window Send Code -->
+
+
             <!-- MODAL window Change password -->
             <div class="flex-cen modal-wrap modal-wrap_change">
                 <div class="flex flex-col flex-cen modal-window modal-window_change">
@@ -210,7 +334,7 @@
                         <img src="images/icons/close.png" />
                     </button>
                     <p class="text_midi title_middle mb-20 modal__title">Сменить пароль</p>
-                    <form class="flex flex-col flex-cen modal_form">
+                    <form class="flex flex-col flex-cen modal_form" method="post" action="smena.php">
                         <div class="input-box-wrapper">
                             <div class="flex input-box input-box_change">
                                 <input type="text" name="oldpass" minlength="3" placeholder="Старый пароль" required />
@@ -226,17 +350,8 @@
                                     required
                                 />
                             </div>
-                            <div class="flex input-box input-box_change mb-20">
-                                <input
-                                    type="text"
-                                    name="repnewpass"
-                                    minlength="3"
-                                    placeholder="Повторите пароль"
-                                    required
-                                />
-                            </div>
                         </div>
-                        <button type="submit" class="btn mb-20 btn_change text_small text_midi disabled">
+                        <button type="submit" name="submit" class="btn mb-20 btn_change text_small text_midi disabled">
                             Сменить
                         </button>
                     </form>
@@ -252,7 +367,7 @@
                     </button>
                     <p class="text_midi title_middle mb-20 modal__title">Вы действительно хотите выйти?</p>
                     <form class="flex flex-col flex-cen modal__form" action="#">
-                        <button type="submit" class="btn text_small midi-text">Выйти</button>
+                        <button id="exit" type="button" class="btn text_small midi-text">Выйти</button>
                     </form>
                 </div>
             </div>
