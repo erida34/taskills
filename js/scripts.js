@@ -266,7 +266,7 @@ $("#selec").on("input", function () {
   var texti = this.value;
   document.getElementById("inp-search").value = texti;
   var bl = "noy";
-  if ($("#mestamoi").hasClass("active") == "active") {
+  if ($("#mestamoi").hasClass("active")) {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
@@ -286,7 +286,7 @@ $(".btn_hash").click(function () {
   var texti = this.innerHTML;
   document.getElementById("inp-search").value = texti;
   var bl = "noy";
-  if ($("#mestamoi").hasClass("active") == "active") {
+  if ($("#mestamoi").hasClass("active")) {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
