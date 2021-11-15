@@ -1,9 +1,12 @@
 <?php
     
 	include_once("db.php");
-    if($_GET["err"] == 3){
-        echo "<script>alert('Неправильно введён старый пароль')</script>";
+    if(isset($_GET["err"])){
+        if($_GET["err"] == 3){
+            echo "<script>alert('Неправильно введён старый пароль')</script>";
+        }
     }
+    
     if(isset($_POST["exit"])){
         unset($_SESSION['user_id']);
     }

@@ -98,6 +98,7 @@
                                 <span class="text_aver place__info-prew">Координаты:</span>
                                 <span class="place__input text_midi place__coord" name="coord"><?php echo $data['coordinates']; ?></span>
                             </div>
+                            <input type="hidden" value='<?php echo $_GET["place"];?>' name="id_place">
                             <div class="place__info-block descr-hash">
                                 <span class="flex text_aver title_small mb-10">Описание</span>
                                 <p class="text__descr mb-10"><?php echo $data['description']; ?></p>

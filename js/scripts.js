@@ -148,7 +148,7 @@ $(".user-actions_red").click(function () {
 
   // Превращаем блок в форму
   $(".container_place").prepend(
-    '<form class="add-form" action="edit_place.php"></form>'
+    '<form method="post" class="add-form" action="edit_place.php"></form>'
   );
   $(".add-form").html($(".place__content").html());
   $("div.place__content").hide();
