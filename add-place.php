@@ -21,38 +21,28 @@
               <a class="menu__link text_aver" href="route.php">Маршруты</a>
             </li>
             <li>
-              <button class="menu__link text_aver drop-menu__link">
-                <?php
-                include_once("db.php");
-                $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
-                $userdata = mysqli_fetch_assoc($query);
-                $login = $userdata["login"];
-                echo $login;
-                ?>
-                <img
-                  src="images/icons/arrow-down.png"
-                  alt=""
-                  class="menu__arrow"
-                />
-              </button>
-              <ul class="drop-menu">
-                <li class="btn_menu btn_change-pass">
-                  <img
-                    src="images/icons/key.png"
-                    alt=""
-                    class="btn_menu__img"
-                  />
-                  <span class="text_small midi-text">Сменить пароль</span>
-                </li>
-                <li class="btn_menu btn_exit">
-                  <img
-                    src="images/icons/logout.png"
-                    alt=""
-                    class="btn_menu__img"
-                  />
-                  <span class="text_small midi-text">Выйти</span>
-                </li>
-              </ul>
+            <?php
+                                if(isset($_SESSION["user_id"])){
+                                    echo <<<END
+                                    <button class="menu__link text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
+                                    <ul class="drop-menu">
+                                        <li class="btn_menu btn_change-pass" id="smena">
+                                            <img src="images/icons/key.png" alt="" class="btn_menu__img">
+                                            <span class="text_small midi-text">Сменить пароль</span>
+                                        </li>
+                                        <li class="btn_menu btn_exit">
+                                            <img src="images/icons/logout.png" alt="" class="btn_menu__img">
+                                            <span class="text_small midi-text">Выйти</span>
+                                        </li>
+                                    </ul>
+                                    END;
+                                }
+                                else{
+                                    echo <<<END
+                                    <button class="menu__link text_aver btn btn_acc">Аккаунт</button>
+                                    END;
+                                }
+                            ?>
             </li>
           </ul>
         </nav>
