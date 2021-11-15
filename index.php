@@ -133,7 +133,8 @@
                             <img src="images/icons/search1.png" />
                         </button>
                     </form>
-                    <select class="select-css">
+                    <select class="select-css" id="selec">
+                        <option>#</option>
                         <?php
                             $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
                             foreach($query4 as $row){
@@ -453,3 +454,4 @@
         <script src="js/scripts.js"></script>
     </body>
 </html>
+

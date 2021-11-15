@@ -240,7 +240,6 @@ $("#inp-search").on("input", function () {
   }
   document.getElementById("other-bl").innerHTML = " ";
   document.getElementById("moi-bl").innerHTML = " ";
-  // if(texti[0] != "#"){
   $.ajax({
     type: "POST",
     url: "search.php",
@@ -250,16 +249,46 @@ $("#inp-search").on("input", function () {
       else $("#moi-bl").html(result);
     },
   });
-  // }
-  // else{
-  //     $.ajax({
-  //         type: "POST",
-  //         url: "search_hash.php",
-  //         data: {texti: texti, block: bl},
-  //         success: function(result) {
-  //             if(bl == "noy") $("#other-bl").html(result);
-  //             else $("#moi-bl").html(result);
-  //         }
-  //     });
-  // }
 });
+
+$("#selec").on("input", function () {
+  var texti = this.value;
+  document.getElementById("inp-search").value = texti;
+  var bl = "noy";
+  if (document.getElementById("mestamoi").className == "active") {
+    var bl = "moi";
+  }
+  document.getElementById("other-bl").innerHTML = " ";
+  document.getElementById("moi-bl").innerHTML = " ";
+  $.ajax({
+    type: "POST",
+    url: "search.php",
+    data: { texti: texti, block: bl },
+    success: function (result) {
+      if (bl == "noy") $("#other-bl").html(result);
+      else $("#moi-bl").html(result);
+    },
+  });
+});
+
+$(".btn_hash").click(function(){
+  var texti = this.innerHTML;
+  document.getElementById("inp-search").value = texti;
+  var bl = "noy";
+  if (document.getElementById("mestamoi").className == "active") {
+    var bl = "moi";
+  }
+  document.getElementById("other-bl").innerHTML = " ";
+  document.getElementById("moi-bl").innerHTML = " ";
+  $.ajax({
+    type: "POST",
+    url: "search.php",
+    data: { texti: texti, block: bl },
+    success: function (result) {
+      if (bl == "noy") $("#other-bl").html(result);
+      else $("#moi-bl").html(result);
+    },
+  });
+});
+
+
