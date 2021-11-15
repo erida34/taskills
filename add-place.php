@@ -22,7 +22,13 @@
             </li>
             <li>
               <button class="menu__link text_aver drop-menu__link">
-                Login
+                <?php
+                include_once("db.php");
+                $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
+                $userdata = mysqli_fetch_assoc($query);
+                $login = $userdata["login"];
+                echo $login;
+                ?>
                 <img
                   src="images/icons/arrow-down.png"
                   alt=""
