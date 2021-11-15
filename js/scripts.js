@@ -237,11 +237,11 @@ $("#verif-btn").click(function () {
 $("#inp-search").on("input", function () {
   var texti = this.value;
   var bl = "noy";
-  if (document.getElementById("mestamoi").className == "active") {
+  if ($("#mestamoi").hasClass("active")) {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
-  document.getElementById("moi-bl").innerHTML = " ";
+  $("#moi-bl").html(" ");
   $.ajax({
     type: "POST",
     url: "search.php",
@@ -257,11 +257,11 @@ $("#selec").on("input", function () {
   var texti = this.value;
   document.getElementById("inp-search").value = texti;
   var bl = "noy";
-  if (document.getElementById("mestamoi").className == "active") {
+  if ($("#mestamoi").hasClass("active") == "active") {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
-  document.getElementById("moi-bl").innerHTML = " ";
+  $("#moi-bl").html(" ");
   $.ajax({
     type: "POST",
     url: "search.php",
@@ -277,11 +277,11 @@ $(".btn_hash").click(function(){
   var texti = this.innerHTML;
   document.getElementById("inp-search").value = texti;
   var bl = "noy";
-  if (document.getElementById("mestamoi").className == "active") {
+  if ($("#mestamoi").hasClass("active") == "active") {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
-  document.getElementById("moi-bl").innerHTML = " ";
+  $("#moi-bl").html(" ");
   $.ajax({
     type: "POST",
     url: "search.php",
