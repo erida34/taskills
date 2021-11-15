@@ -13,7 +13,7 @@ $(document).ready(function () {
         if (j == 1) {
             j--;
             $("#clickonGL").css({ "z-index": "-1", "background-color": "rgba(0, 0, 0, 0)" });
-            $("#imgonGL").attr("src", "images/index/alfa-img.png");
+            $("#imgonGL").attr("src", "images/alfa-img.png");
         }
     });
 });
