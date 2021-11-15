@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
         header("Location: index.php"); exit();
     }
     else{
-        echo "Вы ввели неправильный пароль";
+        header("Location: index.php?err=3"); exit();
     }
 }
 

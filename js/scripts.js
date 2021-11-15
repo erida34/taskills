@@ -148,7 +148,7 @@ $(".user-actions_red").click(function () {
 
   // Превращаем блок в форму
   $(".container_place").prepend(
-    '<form class="add-form" action="any.php"></form>'
+    '<form class="add-form" action="edit_place.php"></form>'
   );
   $(".add-form").html($(".place__content").html());
   $("div.place__content").hide();
@@ -165,7 +165,7 @@ $(".user-actions_red").click(function () {
       navigator.geolocation.getCurrentPosition(function (position) {
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
-        $('input[name="coord"]').val(lat + ", " + lat);
+        $('input[name="coord"]').val(lat + ", " + lng);
       });
     });
   }
@@ -182,7 +182,7 @@ if (!navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       var lat = position.coords.latitude;
       var lng = position.coords.longitude;
-      $('input[name="coord"]').val(lat + ", " + lat);
+      $('input[name="coord"]').val(lat + ", " + lng);
     });
   });
 }
