@@ -32,11 +32,9 @@
             echo "ok";
         }
         else{
-            echo "<script>alert('При регистрации произошли следующие ошибки:";
             foreach($err AS $error){
                echo $error;
             }
-            echo "');document.write(`<meta http-equiv='refresh' content='0; URL=login.php'/>`)</script>";
         }
 
     }

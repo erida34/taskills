@@ -8,7 +8,10 @@
 
         if($_POST["cod"] == $data["code"]){
             mysqli_query($link, "UPDATE `users` SET `verification`=1 WHERE `id`=$id");
+            echo "ok";
         }
-        echo "ok";
+        else{
+            echo "no";
+        }
     }
  ?>

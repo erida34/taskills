@@ -212,13 +212,15 @@ $("#reg-btn").click(function () {
           },
         });
       }
-      console.log(result);
+      else{
+        alert(result);
+      }
     },
   });
 });
 
 $("#verif-btn").click(function () {
-  var form = new FormData(document.forms.reg);
+  var form = new FormData(document.forms.verif);
   $.ajax({
     type: "POST",
     url: "verificode.php",
@@ -227,7 +229,7 @@ $("#verif-btn").click(function () {
       if (result == "ok") {
         $(".modal-wrap_code").hide();
       }
-      console.log(result);
+      else alert("Неправильный код");
     },
   });
 });
@@ -290,5 +292,4 @@ $(".btn_hash").click(function(){
     },
   });
 });
-
 
