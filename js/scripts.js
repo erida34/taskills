@@ -154,6 +154,24 @@ $(".user-actions_red").click(function () {
   $("div.place__content").hide();
 
   $(".user-actions_red").attr("disabled", true);
+  var findMeButton = $(".find-me");
+  if (!navigator.geolocation) {
+    findMeButton.addClass("disabled");
+    $(".no-browser-support").addClass("visible");
+  } else {
+    findMeButton.on("click", function (e) {
+      e.preventDefault();
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        alert("click2");
+        console.log(lat + ", " + lat);
+        console.log($('input[name="coord"]').val);
+        $('input[name="coord"]').val(lat + ", " + lat);
+        console.log($('input[name="coord"]').val);
+      });
+    });
+  }
 });
 
 // Скрипт определения геолокации пользователя
