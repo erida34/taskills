@@ -99,7 +99,7 @@
                                         <li class="tab-nav_sec-menu"><a id="ostalnye" href="#other">Обзор</a></li>
                                     </ul>
                                     <!-- <div class="flex flex-cen tab-nav_sec-menu"> -->
-                                    <form action="add-place.html">
+                                    <form action="add-place.php">
                                         <button class="flex flex-cen btn_add-place">
                                             <span> Добавить</span>
                                             <svg width="22" height="22" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">

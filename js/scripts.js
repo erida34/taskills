@@ -154,6 +154,21 @@ $(".user-actions_red").click(function () {
   $("div.place__content").hide();
 
   $(".user-actions_red").attr("disabled", true);
+
+  var findMeButton = $(".find-me");
+  if (!navigator.geolocation) {
+    findMeButton.addClass("disabled");
+    $(".no-browser-support").addClass("visible");
+  } else {
+    findMeButton.on("click", function (e) {
+      e.preventDefault();
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        $('input[name="coord"]').val(lat + ", " + lat);
+      });
+    });
+  }
 });
 
 // Скрипт определения геолокации пользователя
@@ -167,11 +182,7 @@ if (!navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       var lat = position.coords.latitude;
       var lng = position.coords.longitude;
-      alert("click2");
-      console.log(lat + ", " + lat);
-      console.log($('input[name="coord"]').val);
       $('input[name="coord"]').val(lat + ", " + lat);
-      console.log($('input[name="coord"]').val);
     });
   });
 }
@@ -211,8 +222,7 @@ $("#reg-btn").click(function () {
             console.log(result);
           },
         });
-      }
-      else{
+      } else {
         alert(result);
       }
     },
@@ -228,8 +238,7 @@ $("#verif-btn").click(function () {
     success: function (result) {
       if (result == "ok") {
         $(".modal-wrap_code").hide();
-      }
-      else alert("Неправильный код");
+      } else alert("Неправильный код");
     },
   });
 });
@@ -237,11 +246,11 @@ $("#verif-btn").click(function () {
 $("#inp-search").on("input", function () {
   var texti = this.value;
   var bl = "noy";
-  if (document.getElementById("mestamoi").className == "active") {
+  if ($("#mestamoi").hasClass("active")) {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
-  document.getElementById("moi-bl").innerHTML = " ";
+  $("#moi-bl").html(" ");
   $.ajax({
     type: "POST",
     url: "search.php",
@@ -257,11 +266,11 @@ $("#selec").on("input", function () {
   var texti = this.value;
   document.getElementById("inp-search").value = texti;
   var bl = "noy";
-  if (document.getElementById("mestamoi").className == "active") {
+  if ($("#mestamoi").hasClass("active") == "active") {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
-  document.getElementById("moi-bl").innerHTML = " ";
+  $("#moi-bl").html(" ");
   $.ajax({
     type: "POST",
     url: "search.php",
@@ -273,15 +282,15 @@ $("#selec").on("input", function () {
   });
 });
 
-$(".btn_hash").click(function(){
+$(".btn_hash").click(function () {
   var texti = this.innerHTML;
   document.getElementById("inp-search").value = texti;
   var bl = "noy";
-  if (document.getElementById("mestamoi").className == "active") {
+  if ($("#mestamoi").hasClass("active") == "active") {
     var bl = "moi";
   }
   document.getElementById("other-bl").innerHTML = " ";
-  document.getElementById("moi-bl").innerHTML = " ";
+  $("#moi-bl").html(" ");
   $.ajax({
     type: "POST",
     url: "search.php",
@@ -292,4 +301,3 @@ $(".btn_hash").click(function(){
     },
   });
 });
-

@@ -99,17 +99,22 @@
               ></textarea>
             </div>
 
-            <div class="flex mb-20">
-              <div class="load-file">
-                <input class="img-load" id="img-load-1" type="file" />
-                <label
-                  class="flex flex-cen label-load"
-                  id="label-load-1"
-                  for="img-load-1"
-                  ><img src="images/icons/plus.png" alt="" class="prew-img"
-                /></label>
-              </div>
-            </div>
+            <form action="uploadImages.php" method="post" enctype="multipart/form-data" id="uploadImages">
+                <input type="file" id="addImages" multiple="">
+                <!-- <input type="hidden" name="azaza" value="zazaza"> -->
+                <ul id="uploadImagesList">
+                    <li class="item template">
+                        <span class="img-wrap">
+                            <img src="image.jpg" alt="">
+                        </span>
+                        <!-- <span class="delete-link" title="Удалить">Удалить</span> -->
+                    </li>
+                </ul>
+                <div class="clear"></div>
+                <!-- <div>
+                    <input type="submit" value="Отправить">
+                </div> -->
+            </form>
 
             <div class="flex input-box input-box_add">
               <input
@@ -380,5 +385,6 @@
     </footer>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/image-upload.js"></script>
   </body>
 </html>
