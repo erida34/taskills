@@ -93,16 +93,6 @@ if (el) {
   });
 }
 
-// Скрипт показать больше
-var el = document.getElementById("card-btn");
-if (el) {
-  document.querySelector("#card-btn").addEventListener("click", function () {
-    document.querySelectorAll(".card").forEach(function (eventCard) {
-      eventCard.classList.toggle("card_active");
-    });
-  });
-}
-
 // Скрипт редактирования места
 $(".user-actions_red").click(function () {
   // Заменяем все .place__input на input
@@ -138,7 +128,7 @@ $(".user-actions_red").click(function () {
 
   // Добавляем кнопку определения координат
   $(
-    '<button type="button" class="find-me btn btn-info btn-block">Find My Location</button>'
+    '<button type="button" class="find-me btn btn-info btn-block">Мои координаты</button>'
   ).insertAfter('input[name="coord"]');
 
   // Добавляем кнопку сохранить
@@ -155,6 +145,7 @@ $(".user-actions_red").click(function () {
 
   $(".user-actions_red").attr("disabled", true);
 
+  // Скрипт определения геолокации пользователя
   var findMeButton = $(".find-me");
   if (!navigator.geolocation) {
     findMeButton.addClass("disabled");

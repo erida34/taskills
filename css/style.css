@@ -217,7 +217,8 @@ button {
 }
 
 /* CARDS */
-.cards-wrapper {
+.cards-wrapper,
+.upload-img__container {
   flex-wrap: wrap;
 }
 .card:hover {
@@ -561,10 +562,6 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 0.9375rem;
 }
 
-.place__images {
-  width: 30%;
-}
-
 .place__img {
   width: 100%;
   height: 230px;
@@ -610,50 +607,6 @@ input[type="number"]::-webkit-inner-spin-button {
   outline: none;
 }
 
-#img-preview {
-  width: 300px;
-  height: 100px;
-}
-/* 
-label {
-  display: inline-block;
-  width: 8em;
-  height: 8em;
-  background: silver;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-} */
-
-.load-file input {
-  display: none;
-}
-
-.label-load {
-  width: 250px;
-  height: 150px;
-  background-size: cover;
-  border-radius: 8px;
-  border: 2px dashed grey;
-  margin-right: 20px;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.label-load:hover {
-  border: 2px solid #000;
-}
-
-.img-load {
-  z-index: 2;
-}
-
-.prew-img {
-  width: 40px;
-  height: 40px;
-  filter: opacity(0.5);
-}
-
 .btn_add {
   margin-bottom: 30px;
 }
@@ -694,6 +647,7 @@ label {
   margin: 0 auto;
 }
 
+/* SELECT STYLE */
 .select-css {
   font-size: 16px;
   font-family: sans-serif;
@@ -743,3 +697,146 @@ label {
   background-position: left 0.7em top 50%, 0 0;
   padding: 0.6em 0.8em 0.5em 1.4em;
 }
+
+/* IMAGE UPLOAD STYLE */
+.prew-icon {
+  font-size: 40px;
+}
+
+.label-load {
+  width: 250px;
+  height: 150px;
+  border-radius: 8px;
+  border: 2px dashed grey;
+  padding: 20px;
+  text-align: center;
+  transition: 0.2s;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.label-load input {
+  display: none;
+}
+
+.label-load span,
+.label-load i {
+  color: grey;
+  transition: 200ms color;
+  margin-bottom: 10px;
+}
+
+.label-load:hover {
+  border: 2px solid #000;
+}
+
+.label-load:hover span,
+.label-load:hover i {
+  color: #000;
+}
+
+#uploadImagesList {
+  list-style: none;
+  padding: 0;
+}
+
+#uploadImagesList .item {
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#uploadImagesList .item .img-wrap img {
+  object-fit: cover;
+  width: 250px;
+  height: 150px;
+}
+
+#uploadImagesList .item .delete-link {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  filter: invert(1);
+}
+
+.delete-link img {
+  width: 15px;
+  height: 15px;
+  background: transparent;
+}
+
+/* SLIDER */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.place__images {
+  height: 600px;
+}
+
+.swiper-wrapper {
+  border: 1px solid black;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 600px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ffffffbd;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets {
+  bottom: 30px;
+}
+
+.swiper-pagination-bullet {
+  width: var(
+    --swiper-pagination-bullet-width,
+    var(--swiper-pagination-bullet-size, 10px)
+  );
+  height: var(
+    --swiper-pagination-bullet-height,
+    var(--swiper-pagination-bullet-size, 10px)
+  );
+  background: var(--secind-color-3);
+}
+/* <?php
+                            $query = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='".intval($place)."'");
+                            foreach($query as $row){
+                                $src = $row["src"];
+                                echo <<<END
+                                        <img
+                                            src="$src"
+                                            alt="img"
+                                            class="place__img imgonclick"
+                                        />
+        END; } ?> */
