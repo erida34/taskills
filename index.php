@@ -139,21 +139,7 @@
                             <img src="images/icons/search1.png" />
                         </button>
                     </form>
-                    <select class="select-css" id="selec">
-                        <option>#</option>
-                        <?php
-                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
-                            foreach($query4 as $row){
-                                echo '<option>'.$row["hashtag"].'</option>';
-                            }
-                        ?>
-                    </select>
-                    <?php
-                        $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
-                        foreach($query4 as $row){
-                            echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
-                        }
-                    ?>
+                    
                     <!-- При нажатии на свап-->
                     <!-- <form action="" class="form-search">
                         <input type="text" placeholder="Поиск по #" class="input-search" />
@@ -167,13 +153,23 @@
             <!-- Section CARDS -->
             <section class="section">
                 <div class="container">
+                
+                <!-- SELECT `hashtags`.`hashtag`, count(*) FROM `hashtags` , `places` , `users` where `hashtags`.`id_place` = `places`.`id` and `places`.`id_user` = `users`.`id` and `users`.`id` = 7 GROUP BY `hashtags`.`hashtag` order by 2 desc; -->
                 <?php
                         if(isset($_SESSION["user_id"])){
-                            echo <<<END
-                            <div class="tabs-items tabs_sec-menu">
-                                <div class="tabs-item tab_sec-menu" id="my-cards">
-                                    <div class="flex cards-wrapper" id="moi-bl">
-                            END;
+                            echo '<div class="tabs-items tabs_sec-menu"><div class="tabs-item tab_sec-menu" id="my-cards">';
+                            echo '<select class="select-css" id="selec"><option>#</option>';
+                            $query4 = mysqli_query($link ,"SELECT `hashtags`.`hashtag`, count(*) FROM `hashtags` , `places` , `users` where `hashtags`.`id_place` = `places`.`id` and `places`.`id_user` = `users`.`id` and `users`.`id` = ".intval($_SESSION['user_id'])." GROUP BY `hashtags`.`hashtag` order by 2 desc;");
+                            foreach($query4 as $row){
+                                echo '<option>'.$row["hashtag"].'</option>';
+                            }
+                            echo '</select>';
+                            $query4 = mysqli_query($link ,"SELECT `hashtags`.`hashtag`, count(*) FROM `hashtags` , `places` , `users` where `hashtags`.`id_place` = `places`.`id` and `places`.`id_user` = `users`.`id` and `users`.`id` = ".intval($_SESSION['user_id'])." GROUP BY `hashtags`.`hashtag` order by 2 desc LIMIT 5;");
+                            foreach($query4 as $row){
+                                echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
+                            }
+                            
+                            echo '<div class="flex cards-wrapper" id="moi-bl">';
 
                             $query = mysqli_query($link ,"SELECT * FROM `places` WHERE `id_user`='".intval($_SESSION['user_id'])."';");
 
@@ -220,6 +216,17 @@
                                 
                             END;
 
+                            echo '<select class="select-css" id="selec"><option>#</option>';
+                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
+                            foreach($query4 as $row){
+                                echo '<option>'.$row["hashtag"].'</option>';
+                            }
+                            echo '</select>';
+                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
+                            foreach($query4 as $row){
+                                echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
+                            }
+
                             echo '<div class="flex cards-wrapper" id="other-bl">';
                             $query = mysqli_query($link ,"SELECT * FROM `places` WHERE 1;");
 
@@ -258,6 +265,16 @@
                             echo '</div></div></div>';
                         }
                         else{
+                            echo '<select class="select-css" id="selec"><option>#</option>';
+                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
+                            foreach($query4 as $row){
+                                echo '<option>'.$row["hashtag"].'</option>';
+                            }
+                            echo '</select>';
+                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
+                            foreach($query4 as $row){
+                                echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
+                            }
                             echo '<div class="flex cards-wrapper" id="other-bl">';
                             $query = mysqli_query($link ,"SELECT * FROM `places` WHERE 1;");
 

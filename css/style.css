@@ -239,13 +239,6 @@ button {
   margin-right: 0px;
 }
 
-.card:nth-child(n + 5) {
-  display: none;
-}
-
-.card_active:nth-child(n + 1) {
-  display: inline-block;
-}
 
 .card__img {
   width: 100%;
