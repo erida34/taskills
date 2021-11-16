@@ -16,6 +16,10 @@ foreach($hashtags as $row){
     mysqli_query($link ,"INSERT INTO `hashtags`(`id_place`, `hashtag`) VALUES ({$id_place},'#{$hash}')");
 }
 
+
+
+
+
 header("Location: index.php"); exit();
 
 

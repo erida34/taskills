@@ -71,8 +71,9 @@ $(".drop-menu__link").click(function () {
     }, 100);
   }
 });
-
-// Скрипт редактирования места
+var new_imgs = [];
+var del_imgs = [];
+;// Скрипт редактирования места
 $(".user-actions_red").click(function () {
   // Заменяем все .place__input на input
   var i,
@@ -204,6 +205,8 @@ $(".user-actions_red").click(function () {
       var itemPreview = itemPreviewTemplate.clone();
 
       itemPreview.find(".img-wrap img").attr("src", event.target.result);
+      itemPreview.find(".img-wrap img").addClass("new-upload");
+      itemPreview.find(".img-wrap img")[0].setAttribute("value", file.name);
       itemPreview.data("id", file.name);
 
       imagesList.append(itemPreview);
@@ -211,13 +214,23 @@ $(".user-actions_red").click(function () {
       queue[file.name] = file;
     });
     reader.readAsDataURL(file);
+    new_imgs.push(file)
   }
 
   // Удаление фотографий
   imagesList.on("click", ".delete-link", function () {
     var item = $(this).closest(".item"),
       id = item.data("id");
-
+    if($(this).parent().find(".img-upl").hasClass("new-upload")){
+      for(i = 0; i < new_imgs.length; i++){
+        if(new_imgs[i]["name"] == $(this).parent().find(".new-upload")[0].getAttribute("value")){
+          new_imgs.splice(i, 1);
+        }
+      }
+    }
+    else{
+      del_imgs.push($(this).parent().find(".img-upl")[0].getAttribute("src"));
+    }
     delete queue[id];
 
     item.remove();

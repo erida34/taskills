@@ -70,7 +70,6 @@ function preview(file) {
   var reader = new FileReader();
   reader.addEventListener("load", function (event) {
     var itemPreview = itemPreviewTemplate.clone();
-
     itemPreview.find(".img-wrap img").attr("src", event.target.result);
     itemPreview.data("id", file.name);
 
