@@ -19,6 +19,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     // Подключение к БД
     $link = mysqli_connect($bd_host, $bd_user, $bd_password);
     mysqli_select_db($link, $bd_name);
+    mysqli_set_charset($link, "utf8");
     // Запись логина пользователя в сессию
     if(isset($_SESSION['login'])){
         $ses_login = $_SESSION['login'];
