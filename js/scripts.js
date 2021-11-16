@@ -400,6 +400,18 @@ $("#exit").click(function () {
     },
   });
 });
+$("#verif_close").click(function () {
+  $.ajax({
+    type: "POST",
+    url: "index.php",
+    data: {
+      exit: "exit",
+    },
+    success: function (result) {
+      location.reload();
+    },
+  });
+});
 
 $("#reg-btn").click(function () {
   var form = new FormData(document.forms.reg);
@@ -415,7 +427,7 @@ $("#reg-btn").click(function () {
     success: function (result) {
       if (result == "ok") {
         $(".modal-wrap_code").addClass("display-flex");
-        $("#wind_log_reg").addClass("display-none");
+        $(".modal-window_acc").addClass("display-none");
         $.ajax({
           type: "POST",
           url: "verification.php",
@@ -438,7 +450,9 @@ $("#verif-btn").click(function () {
     data: { cod: form.get("cod") },
     success: function (result) {
       if (result == "ok") {
-        $(".modal-wrap_code").addClass("display-none");
+        $(".modal-wrap_code").removeClass("display-flex");
+        $(".modal-wrap_acc").removeClass("display-flex");
+        location.reload();
       } else alert("Неправильный код");
     },
   });

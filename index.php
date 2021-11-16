@@ -385,9 +385,12 @@
             <!-- MODAL window Register/ Log in -->
 
             <!-- MODAL window Send Code -->
-            <div class="flex-cen modal-wrap modal-wrap_code <?php $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
-        $userdata = mysqli_fetch_assoc($query); if($userdata["verification"]==="0"){echo "display-flex";include_once("verification.php");} ?>">
+            <div class="flex-cen modal-wrap modal-wrap_code <?php if(isset($_SESSION['user_id'])){$query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
+        $userdata = mysqli_fetch_assoc($query); if($userdata["verification"]==="0"){echo "display-flex";include_once("verification.php");} }?>">
                 <div class="flex flex-col flex-cen modal-window modal-window_code">
+                    <button class="btn_close" id='verif_close'>
+                        <img src="images/icons/close.png" />
+                    </button>
                     <p class="text_midi  title_middle mb-20 modal__title">Завершение регистрации</p>
                     <p class="mb-20 modal__text">На вашу почту был выслан код подтверждения</p>
                     <form name="verif" class="flex flex-col flex-cen modal__form" action="#">
