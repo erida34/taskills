@@ -110,11 +110,11 @@ $(".user-actions_red").click(function () {
     '<button type="button" class="find-me btn btn-info btn-block">Мои координаты</button>'
   ).insertAfter('input[name="coord"]');
 
+  // Добавляем поле для вставки фото
   $(
-    '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""></label> <ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>'
+    '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""></label> <ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""><input type="hidden" name="img"></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>'
   ).insertAfter(".place__content");
 
-  $(".swiper").addClass("display-none");
   $(
     '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
   ).insertAfter(".upload-img__container");
@@ -125,11 +125,9 @@ $(".user-actions_red").click(function () {
   );
 
   $(".add-form").html($(".container_place").html());
-  // $(".container_place").addClass("display-none");
   $(".container_place").remove();
-  // document.getElementById("id1").remove();
-
-  $(".user-actions_red").attr("disabled", true);
+  $(".swiper-slide-duplicate").remove();
+  $(".user-actions_red").addClass("display-none");
 
   var queue = {};
   var imagesList = $("#uploadImagesList");
@@ -155,7 +153,6 @@ $(".user-actions_red").click(function () {
   });
 
   var dropbox;
-
   dropbox = document.getElementById("dropbox");
 
   if (dropbox) {
@@ -235,6 +232,8 @@ $(".user-actions_red").click(function () {
       imagesList.append(itemPreview);
     }
   }
+
+  $(".place__images").remove();
   //------------------------------
   //
 

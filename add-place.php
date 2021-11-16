@@ -100,7 +100,7 @@
                   <li class="item template">
                       <span class="img-wrap">
                           <img src="" class="img-upl" alt="">
-                          <input type="file">
+                          <input type="hidden" name="img">
                       </span>
                       <button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button>
                   </li>
