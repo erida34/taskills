@@ -94,7 +94,7 @@
                 <img src="images/icons/pencil.png" />
               </button>
             </div>
-            <div>
+            <div class="mb-20">
               <div class="title_small info mb-20">Информация</div>
               <div class="place__info-block">
                 <span class="text_aver place__info-prew">Адрес:</span>
@@ -140,14 +140,14 @@
           <!-- Slider main container -->
           <div class="mb-20 swiper place__images">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="https://phonoteka.org/uploads/posts/2021-06/1624712360_1-phonoteka_org-p-milii-kotik-oboi-krasivo-1.jpg" alt="img" class="place__img">
-              </div>
-              <div class="swiper-slide">
-                <img src="https://i.imgur.com/onvgh4R.jpg" alt="img" class="place__img">
-              </div>
-              <div class="swiper-slide">
-                <img src="https://i.imgur.com/onvgh4R.jpg" alt="img" class="place__img">
+                          <?php
+                            $query = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='".intval($place)."'");
+                            foreach($query as $row){
+                                $src = $row["src"];
+                                echo <<<END
+                                <div class="swiper-slide"><img src="$src" alt="img" class="place__img"/></div>
+                          END; } 
+                          ?> 
               </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -386,7 +386,6 @@
     <!-- Initialize Swiper -->
     <script>
       var swiper = new Swiper(".place__images", {
-          loop: true,
           spaceBetween: 30,
 
           pagination: {

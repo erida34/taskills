@@ -72,9 +72,6 @@
                 <div class="container">
                     <div class="flex flex-cen mb-20">
                         <h1 class="title_biggest text_aver route__name">Памятный маршрут</h1>
-                        <button class="user_actions user_actions_red">
-                            <img src="images/icons/pencil.png" />
-                        </button>
                     </div>
 
                     <div class="title_small info mb-20">Информация</div>
