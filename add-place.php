@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css" />
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Места</title>
   </head>
@@ -51,12 +51,6 @@
       <!-- Section MENU -->
     </header>
     <main>
-      <!-- Script image-scale -->
-      <div id="clickonGL" style="z-index: -1; background-color: rgba(0, 0, 0, 0);">
-          <img src="images/alfa-img.png" id="imgonGL">
-      </div>
-      <!-- Script image-scale -->
-
       <!-- Section ADD Form-->
       <section class="section section_top">
         <div class="container">
@@ -95,22 +89,23 @@
                 required
               ></textarea>
             </div>
- 
-            <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
-              <i class="material-icons" style="font-size: 40px">attach_file</i>
-                <span class="text_cen text_small">Выберите / Перетащите свои файлы</span>
-                <input class="" type="file" id="addImages" multiple="">
-                <input type="hidden" name="azaza" value="zazaza">
-            </label>   
-                
-            <ul class="flex upload-img__container" id="uploadImagesList">
-                <li class="item template">
-                    <span class="img-wrap">
-                        <img src="" class="imgonclick" alt="">
-                    </span>
-                    <button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button>
-                </li>
-            </ul>
+            
+            <div class="block_upload">
+              <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
+                <i class="material-icons" style="font-size: 40px">attach_file</i>
+                  <span class="text_cen text_small">Выберите / Перетащите свои файлы</span>
+                  <input class="" type="file" id="addImages" multiple="">
+              </label>   
+                  
+              <ul class="flex upload-img__container" id="uploadImagesList">
+                  <li class="item template">
+                      <span class="img-wrap">
+                          <img src="" alt="">
+                      </span>
+                      <button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button>
+                  </li>
+              </ul>
+            </div>
 
             <div class="flex input-box input-box_add">
               <input
@@ -382,6 +377,5 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/image-upload.js"></script>
-    <script src="js/scale-img.js"></script>
   </body>
 </html>

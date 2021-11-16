@@ -148,12 +148,6 @@
                             echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
                         }
                     ?>
-                    <!-- При нажатии на свап-->
-                    <!-- <form action="" class="form-search">
-                        <input type="text" placeholder="Поиск по #" class="input-search" />
-                        <button type="submit" class="btn btn-search"></button>
-                    </form>
-                    <button class="swap-search">Поиск места</button> -->
                 </div>
             </section>
             <!-- Section SEARCH -->
@@ -189,7 +183,7 @@
                                                 <p class="text_small card__descr">
                                                     {$desc}
                                                 </p>
-                                                <form action="place.php" method="get">
+                                                <form action="route.php" method="get">
                                                     <button type="submit" name="place" value="{$row['id']}" class="text_small text_midi btn btn_more">
                                                         Смотреть
                                                     </button>

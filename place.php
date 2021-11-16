@@ -32,7 +32,7 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Какое-то конкретное место</title>
@@ -138,7 +138,7 @@
           </div>
 
           <!-- Slider main container -->
-          <div class="mb-20 swiper place__images ">
+          <div class="mb-20 swiper ">
             <div class="swiper-wrapper">
               <div class="swiper-slide"><img src="https://phonoteka.org/uploads/posts/2021-06/1624712360_1-phonoteka_org-p-milii-kotik-oboi-krasivo-1.jpg" alt="img" class="place__img"></div>
               <div class="swiper-slide"><img src="https://i.imgur.com/onvgh4R.jpg" alt="img" class="place__img"></div>
@@ -372,6 +372,7 @@
     </footer>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/image-upload.js"></script>
 
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -379,22 +380,19 @@
     <!-- Initialize Swiper -->
     <script>
       var swiper = new Swiper(".place__images", {
-          // Optional parameters
           loop: true,
+          spaceBetween: 30,
 
-          // If we need pagination
           pagination: {
               el: '.swiper-pagination',
               dynamicBullets: true,
           },
 
-          // Navigation arrows
           navigation: {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
           },
 
-          // And if we need scrollbar
           scrollbar: {
               el: '.swiper-scrollbar',
           },

@@ -55,17 +55,17 @@ $("form input[type=email]").on("input", function () {
 });
 
 // Выпадающее меню
-$(".drop-menu").hide();
+$(".drop-menu").addClass("display-none");
 $(".drop-menu__link").click(function () {
   if ($(".drop-menu").hasClass("active")) {
     setTimeout(function () {
       $(".drop-menu").removeClass("active");
       $(".menu__arrow").removeClass("rotate");
-      $(".drop-menu").hide();
+      $(".drop-menu").addClass("display-none");
     }, 100);
   } else {
     setTimeout(function () {
-      $(".drop-menu").show();
+      $(".drop-menu").removeClass("display-none");
       $(".drop-menu").addClass("active");
       $(".menu__arrow").addClass("rotate");
     }, 100);
@@ -132,18 +132,62 @@ $(".user-actions_red").click(function () {
   ).insertAfter('input[name="coord"]');
 
   // Добавляем кнопку сохранить
-  $(
-    '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
-  ).insertAfter(".descr-hash");
+  // $(
+  //   '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
+  // ).insertAfter(".descr-hash");
 
   // Превращаем блок в форму
   $(".container_place").prepend(
     '<form method="post" class="add-form" action="edit_place.php"></form>'
   );
   $(".add-form").html($(".place__content").html());
-  $("div.place__content").hide();
+  $("div.place__content").addClass("display-none");
 
   $(".user-actions_red").attr("disabled", true);
+
+  //
+  //----------------------------------------
+  // var div = document.createElement("div");
+  // div.outerHTML = '<div class="test">test</div>';
+  // console.log(div.outerHTML); // output: "<div></div>"
+
+  $(
+    '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""><input type="hidden" name="azaza" value="zazaza"></label><ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>'
+  ).insertAfter(".place__content");
+
+  // var imgWrap = document.createElement("div");
+  // imgWrap.innerText = "gg";
+  // imgWrap.className = "place__images";
+  // if (imgWrap) {
+  //   imgWrap.outerHTML =
+  //     '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""><input type="hidden" name="azaza" value="zazaza"></label><ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>';
+  // }
+
+  list = document.querySelectorAll(".place__img");
+  if (list) {
+    for (i = 0; i < list.length; ++i) {
+      var srcImg = list[i].getAttribute("src");
+      var img = document.createElement("img");
+
+      var itemPreview = itemPreviewTemplate.clone();
+
+      itemPreview.find(".img-wrap img").attr("src", srcImg);
+      imagesList.append(itemPreview);
+
+      console.log(srcImg);
+      // if (imagesList[i]) {
+      //   imagesList[i].attr("src", srcImg);
+      // }
+    }
+  }
+
+  $(".swiper").addClass("display-none");
+  $(
+    '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
+  ).insertAfter(".place__images");
+
+  //------------------------------
+  //
 
   // Скрипт определения геолокации пользователя
   var findMeButton = $(".find-me");
@@ -205,7 +249,7 @@ $("#reg-btn").click(function () {
     success: function (result) {
       if (result == "ok") {
         $(".modal-wrap_code").addClass("display-flex");
-        $("#wind_log_reg").hide();
+        $("#wind_log_reg").addClass("display-none");
         $.ajax({
           type: "POST",
           url: "verification.php",
@@ -228,7 +272,7 @@ $("#verif-btn").click(function () {
     data: { cod: form.get("cod") },
     success: function (result) {
       if (result == "ok") {
-        $(".modal-wrap_code").hide();
+        $(".modal-wrap_code").addClass("display-none");
       } else alert("Неправильный код");
     },
   });

@@ -32,17 +32,8 @@ $("#addImages").on("change", function () {
 var dropbox;
 
 dropbox = document.getElementById("dropbox");
-dropbox.addEventListener("dragenter", dragenter, false);
-dropbox.addEventListener("dragover", dragover, false);
-dropbox.addEventListener("drop", drop, false);
-function dragenter(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-function dragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
+if (dropbox) {
+  dropbox.addEventListener("drop", drop, false);
 }
 
 function drop(e) {
