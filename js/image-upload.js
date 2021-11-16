@@ -1,6 +1,4 @@
-var maxFileSize = 2 * 1024 * 1024; // (байт) Максимальный размер файла (2мб)
 var queue = {};
-var form = $("form#uploadImages");
 var imagesList = $("#uploadImagesList");
 
 var itemPreviewTemplate = imagesList.find(".item.template").clone();
@@ -13,16 +11,10 @@ $("#addImages").on("change", function () {
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
 
-    if (!file.type.match(/image\/(jpeg|jpg|png|gif)/)) {
-      alert("Фотография должна быть в формате jpg, png или gif");
+    if (!file.type.match(/image\/(jpeg|jpg|png|gif|webp)/)) {
+      alert("Фотография должна быть в формате jpg, png, webp или gif");
       continue;
     }
-
-    if (file.size > maxFileSize) {
-      alert("Размер фотографии не должен превышать 2 Мб");
-      continue;
-    }
-
     preview(files[i]);
   }
 
@@ -30,10 +22,22 @@ $("#addImages").on("change", function () {
 });
 
 var dropbox;
-
 dropbox = document.getElementById("dropbox");
+
 if (dropbox) {
+  dropbox.addEventListener("dragenter", dragenter, false);
+  dropbox.addEventListener("dragover", dragover, false);
   dropbox.addEventListener("drop", drop, false);
+}
+
+function dragenter(e) {
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+function dragover(e) {
+  e.stopPropagation();
+  e.preventDefault();
 }
 
 function drop(e) {
@@ -51,12 +55,7 @@ function handleFiles(files) {
     var file = files[i];
 
     if (!file.type.match(/image\/(jpeg|jpg|png|gif)/)) {
-      alert("Фотография должна быть в формате jpg, png или gif");
-      continue;
-    }
-
-    if (file.size > maxFileSize) {
-      alert("Размер фотографии не должен превышать 2 Мб");
+      alert("Фотография должна быть в формате jpg, png, webp или gif");
       continue;
     }
 
@@ -70,8 +69,6 @@ function handleFiles(files) {
 function preview(file) {
   var reader = new FileReader();
   reader.addEventListener("load", function (event) {
-    var img = document.createElement("img");
-
     var itemPreview = itemPreviewTemplate.clone();
 
     itemPreview.find(".img-wrap img").attr("src", event.target.result);

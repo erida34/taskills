@@ -89,8 +89,7 @@
                 required
               ></textarea>
             </div>
-            
-            <div class="block_upload">
+                                
               <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
                 <i class="material-icons" style="font-size: 40px">attach_file</i>
                   <span class="text_cen text_small">Выберите / Перетащите свои файлы</span>
@@ -100,12 +99,12 @@
               <ul class="flex upload-img__container" id="uploadImagesList">
                   <li class="item template">
                       <span class="img-wrap">
-                          <img src="" alt="">
+                          <img src="" class="img-upl" alt="">
+                          <input type="file">
                       </span>
                       <button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button>
                   </li>
               </ul>
-            </div>
 
             <div class="flex input-box input-box_add">
               <input

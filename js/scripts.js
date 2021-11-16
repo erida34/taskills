@@ -72,27 +72,6 @@ $(".drop-menu__link").click(function () {
   }
 });
 
-// Скрипт предпоказа картинок
-var el = document.getElementById("img-load-1");
-if (el) {
-  document.querySelector("#img-load-1").addEventListener("change", function () {
-    if (this.files[0]) {
-      var fr = new FileReader();
-
-      fr.addEventListener(
-        "load",
-        function () {
-          document.querySelector("#label-load-1").style.backgroundImage =
-            "url(" + fr.result + ")";
-        },
-        false
-      );
-
-      fr.readAsDataURL(this.files[0]);
-    }
-  });
-}
-
 // Скрипт редактирования места
 $(".user-actions_red").click(function () {
   // Заменяем все .place__input на input
@@ -131,61 +110,131 @@ $(".user-actions_red").click(function () {
     '<button type="button" class="find-me btn btn-info btn-block">Мои координаты</button>'
   ).insertAfter('input[name="coord"]');
 
-  // Добавляем кнопку сохранить
-  // $(
-  //   '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
-  // ).insertAfter(".descr-hash");
+  $(
+    '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""></label> <ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>'
+  ).insertAfter(".place__content");
+
+  $(".swiper").addClass("display-none");
+  $(
+    '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
+  ).insertAfter(".upload-img__container");
 
   // Превращаем блок в форму
-  $(".container_place").prepend(
-    '<form method="post" class="add-form" action="edit_place.php"></form>'
+  $(".section_place").prepend(
+    '<form method="post" class="container add-form" action="edit_place.php"></form>'
   );
-  $(".add-form").html($(".place__content").html());
-  $("div.place__content").addClass("display-none");
+
+  $(".add-form").html($(".container_place").html());
+  // $(".container_place").addClass("display-none");
+  $(".container_place").remove();
+  // document.getElementById("id1").remove();
 
   $(".user-actions_red").attr("disabled", true);
 
-  //
-  //----------------------------------------
-  // var div = document.createElement("div");
-  // div.outerHTML = '<div class="test">test</div>';
-  // console.log(div.outerHTML); // output: "<div></div>"
+  var queue = {};
+  var imagesList = $("#uploadImagesList");
 
-  $(
-    '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""><input type="hidden" name="azaza" value="zazaza"></label><ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>'
-  ).insertAfter(".place__content");
+  var itemPreviewTemplate = imagesList.find(".item.template").clone();
+  itemPreviewTemplate.removeClass("template");
+  imagesList.find(".item.template").remove();
 
-  // var imgWrap = document.createElement("div");
-  // imgWrap.innerText = "gg";
-  // imgWrap.className = "place__images";
-  // if (imgWrap) {
-  //   imgWrap.outerHTML =
-  //     '<label class="flex flex-col flex-cen label-load mb-20" id="dropbox"><i class="material-icons" style="font-size: 40px">attach_file</i><span class="text_cen text_small">Выберите / Перетащите свои файлы</span><input class="" type="file" id="addImages" multiple=""><input type="hidden" name="azaza" value="zazaza"></label><ul class="flex upload-img__container" id="uploadImagesList"><li class="item template"><span class="img-wrap"><img src="" class="img-upl" alt=""></span><button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button></li></ul>';
-  // }
+  $("#addImages").on("change", function () {
+    var files = this.files;
+
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+
+      if (!file.type.match(/image\/(jpeg|jpg|png|gif|webp)/)) {
+        alert("Фотография должна быть в формате jpg, png, webp или gif");
+        continue;
+      }
+      preview(files[i]);
+    }
+
+    this.value = "";
+  });
+
+  var dropbox;
+
+  dropbox = document.getElementById("dropbox");
+
+  if (dropbox) {
+    dropbox.addEventListener("dragenter", dragenter, false);
+    dropbox.addEventListener("dragover", dragover, false);
+    dropbox.addEventListener("drop", drop, false);
+  }
+
+  function dragenter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  function dragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  function drop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var dt = e.dataTransfer;
+    var files = dt.files;
+
+    handleFiles(files);
+  }
+
+  function handleFiles(files) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+
+      if (!file.type.match(/image\/(jpeg|jpg|png|gif)/)) {
+        alert("Фотография должна быть в формате jpg, png, webp или gif");
+        continue;
+      }
+
+      preview(files[i]);
+    }
+
+    this.value = "";
+  }
+
+  // Создание превью
+  function preview(file) {
+    var reader = new FileReader();
+    reader.addEventListener("load", function (event) {
+      var itemPreview = itemPreviewTemplate.clone();
+
+      itemPreview.find(".img-wrap img").attr("src", event.target.result);
+      itemPreview.data("id", file.name);
+
+      imagesList.append(itemPreview);
+
+      queue[file.name] = file;
+    });
+    reader.readAsDataURL(file);
+  }
+
+  // Удаление фотографий
+  imagesList.on("click", ".delete-link", function () {
+    var item = $(this).closest(".item"),
+      id = item.data("id");
+
+    delete queue[id];
+
+    item.remove();
+  });
 
   list = document.querySelectorAll(".place__img");
   if (list) {
     for (i = 0; i < list.length; ++i) {
       var srcImg = list[i].getAttribute("src");
-      var img = document.createElement("img");
-
       var itemPreview = itemPreviewTemplate.clone();
 
       itemPreview.find(".img-wrap img").attr("src", srcImg);
       imagesList.append(itemPreview);
-
-      console.log(srcImg);
-      // if (imagesList[i]) {
-      //   imagesList[i].attr("src", srcImg);
-      // }
     }
   }
-
-  $(".swiper").addClass("display-none");
-  $(
-    '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place" type="submit">Отменить</button>'
-  ).insertAfter(".place__images");
-
   //------------------------------
   //
 
