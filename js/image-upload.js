@@ -71,10 +71,11 @@ function preview(file) {
   reader.addEventListener("load", function (event) {
     var itemPreview = itemPreviewTemplate.clone();
     itemPreview.find(".img-wrap img").attr("src", event.target.result);
+    itemPreview.find(".img-wrap img").addClass("new-upload");
     itemPreview.data("id", file.name);
 
     imagesList.append(itemPreview);
-
+    new_imgs.push(event.target.result);
     queue[file.name] = file;
   });
   reader.readAsDataURL(file);
@@ -84,8 +85,38 @@ function preview(file) {
 imagesList.on("click", ".delete-link", function () {
   var item = $(this).closest(".item"),
     id = item.data("id");
-
+    if ($(this).parent().find(".img-upl").hasClass("new-upload")) {
+      for (i = 0; i < new_imgs.length; i++) {
+        if (
+          new_imgs[i]["name"] ==
+          $(this).parent().find(".new-upload")[0].getAttribute("value")
+        ) {
+          new_imgs.splice(i, 1);
+        }
+      }
+    }
   delete queue[id];
 
   item.remove();
+});
+
+
+$("#add_btn").click(function () {
+  var formi = new FormData(document.forms.formadd);
+  $.ajax({
+    type: "POST",
+    url: "send_place.php",
+    data: {
+      name: formi.get("placename"),
+      address: formi.get("address"),
+      coord: formi.get("coord"),
+      descr: formi.get("descr"),
+      hashtag: formi.get("hashtag"),
+      addimg: new_imgs
+    },
+    success: function (result) {
+      location.reload();
+      //console.log(result);
+    },
+  });
 });
