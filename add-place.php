@@ -53,7 +53,7 @@
       <section class="section section_top">
         <div class="container container_add-place">
           <h1 class="title_biggest text_midi mb-20">Добавить место</h1>
-          <form action="" class="form_place">
+          <form action="" class="form_place" name="formadd">
             <div class="flex input-box input-box_add">
               <input
                 type="text"
@@ -150,7 +150,7 @@
               Добавить ещё одно место
             </button>
 
-            <button class="btn btn_add title_small" type="submit">Добавить</button>
+            <button class="btn btn_add title_small" type="button" id="add_btn">Добавить</button>
           </form>
         </div>
       </section>
