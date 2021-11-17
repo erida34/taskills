@@ -225,6 +225,18 @@
                             />
                         </div>
                     </div>
+                    <div class="route_map">
+                        <!-- Если карта есть, то вывести её здесь -->
+                        <div style="position:relative;overflow:hidden;">
+                            <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">
+                            Яндекс.Карты
+                            </a>
+                            <a href="https://yandex.ru/maps/?ll=45.486366%2C52.842445&mode=routes&rtext=52.608826%2C39.599229~52.721295%2C41.452750~53.195878%2C50.100202&rtt=auto&ruri=ymapsbm1%3A%2F%2Fgeo%3Fll%3D39.599%252C52.609%26spn%3D0.431%252C0.226%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%259B%25D0%25B8%25D0%25BF%25D0%25B5%25D1%2586%25D0%25BA~~ymapsbm1%3A%2F%2Fgeo%3Fll%3D50.100%252C53.196%26spn%3D0.658%252C0.459%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%25A1%25D0%25B0%25D0%25BC%25D0%25B0%25D1%2580%25D0%25B0&utm_medium=mapframe&utm_source=maps&z=5.87" style="color:#eee;font-size:12px;position:absolute;top:14px;">
+                            Яндекс.Карты</a>
+                            <iframe src="https://yandex.ru/map-widget/v1/-/CCUuy6syoD" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;">
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </section>
             <!-- Section CARDS -->

@@ -5,6 +5,7 @@
 :root {
   --main-color-f: #fff;
   --main-color-s: #000;
+  --main-color-t: #003deb;
   --second-color: #2ad59f;
   --second-color-2: #e7e8ec;
   --second-color-3: #828282;
@@ -215,7 +216,7 @@ button {
 }
 
 .btn:hover {
-  background: #003deb;
+  background: var(--main-color-t);
 }
 
 .btn-search img {
@@ -302,28 +303,8 @@ button {
 
 .btn_add {
   margin-bottom: 30px;
-  padding: 14px 75px;
+  padding: 10px 50px;
   border-radius: 24px;
-}
-
-.btn_add-form,
-.btn_add-form svg,
-.btn_add-form:hover {
-  transition: 0.1s;
-  background: transparent;
-}
-
-.btn_add-form svg {
-  margin-right: 7px;
-}
-
-.btn_add-form:hover {
-  font-weight: 600;
-}
-
-.btn_add-form:hover svg {
-  width: 42px;
-  height: 42px;
 }
 
 .swap-search {
@@ -657,6 +638,10 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-bottom: 50px;
 }
 
+.route__images {
+  flex-wrap: wrap;
+}
+
 .route__img {
   width: 30%;
   height: 220px;
@@ -724,8 +709,7 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"),
-    linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+  background-image: url(../images/icons/arrow-down.png);
   background-repeat: no-repeat, repeat;
   background-position: right 0.7em top 50%, 0 0;
   background-size: 0.65em auto, 100%;
@@ -740,9 +724,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .select-css:focus {
-  border-color: #aaa;
-  box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
-  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  border-color: #000;
   color: #222;
   outline: none;
 }
@@ -902,7 +884,68 @@ input[type="number"]::-webkit-inner-spin-button {
   background: var(--second-color-3);
 }
 
-/* 
+/* CHECKBOX STYLE */
+.checkbox-input {
+  margin-bottom: 5px;
+}
+/* для элемента input c type="checkbox" */
+.custom-checkbox > input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label, связанного с .custom-checkbox */
+.custom-checkbox > span {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.custom-checkbox > span::before {
+  content: "";
+  display: flex;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на checkbox */
+.custom-checkbox > input:not(:disabled):not(:checked) + span:hover::before {
+  border-color: var(--border-tabs);
+  background-color: var(--separator);
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.custom-checkbox > input:not(:disabled):active + span::before {
+  background-color: var(--second-color-3);
+  border-color: var(--second-color-3);
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.custom-checkbox > input:checked + span::before {
+  border-color: var(--main-color-t);
+  background-color: var(--main-color-t);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.tooltip__marker,
+.tooltip__marker path {
+  stroke: var(--main-color-s);
+}
+
+.route_map iframe {
+  width: 100%;
+  margin-bottom: 30px;
+}
 
 /* scrollbar */
 ::-webkit-scrollbar {
@@ -1029,9 +1072,19 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 180px;
   }
 
+  .route__img {
+    width: 100%;
+    margin: 0 0 15px 0;
+    height: 350px;
+  }
+
   .btn_more {
     width: 100%;
     padding: 9px 20px;
+  }
+
+  .input-box_add {
+    padding: 0 20% 20px 0;
   }
 }
 
@@ -1059,6 +1112,28 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 80%;
   }
 
+  .input-box_add {
+    padding: 0 0 20px 0;
+  }
+
+  .input-box_add_short {
+    flex-direction: column;
+  }
+
+  .upload-img__container .item {
+    margin-right: 0px;
+    width: 100%;
+  }
+
+  .upload-img__container .item .img-wrap img {
+    width: 100%;
+    height: auto;
+  }
+
+  .input-box_add_short input {
+    margin-bottom: 10px;
+  }
+
   .place__info-prew {
     margin-bottom: 5px;
   }
@@ -1066,5 +1141,11 @@ input[type="number"]::-webkit-inner-spin-button {
   .uploadImagesList .item {
     margin-right: 0;
     width: 100%;
+  }
+
+  #imgonGL {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
   }
 }

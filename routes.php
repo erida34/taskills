@@ -95,13 +95,13 @@
                                 <div class="tabs tabs_sec-menu">
                                     <!-- Кнопки -->
                                     <ul class="flex tabs-nav mb-20 tabs-nav_sec-menu">
-                                        <li class="tab-nav_sec-menu"><a id="mestamoi" href="#my-cards">Мои места</a></li>
+                                        <li class="tab-nav_sec-menu"><a id="mestamoi" href="#my-cards">Мои маршруты</a></li>
                                         <li class="tab-nav_sec-menu"><a id="ostalnye" href="#other">Обзор</a></li>
                                     </ul>
                                 </div>
-                                <form action="add-place.php">
+                                <form action="add-route.php">
                                         <button class="flex flex-cen btn btn_add-place">
-                                            <span>Добавить место</span>
+                                            <span>Добавить маршрут</span>
                                             <svg width="22" height="22" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <g>
