@@ -113,7 +113,7 @@
               />
             </div>
 
-            <button type="button" class="flex flex-cen btn_add-form mb-20">
+            <!-- <button type="button" class="flex flex-cen btn_add-form mb-20">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -148,7 +148,7 @@
                 </g>
               </svg>
               Добавить ещё одно место
-            </button>
+            </button> -->
 
             <button class="btn btn_add title_small" type="button" id="add_btn">Добавить</button>
           </form>

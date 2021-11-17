@@ -116,6 +116,7 @@ $("#add_btn").click(function () {
     },
     success: function (result) {
       location.reload();
+      //console.log(result);
     },
   });
 });

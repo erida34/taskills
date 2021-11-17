@@ -6,10 +6,10 @@ $address = $_POST["address"];
 $coords = $_POST["coord"];
 $desc = $_POST["descr"];
 $hashtags = array_slice(explode("#" ,$_POST["hashtag"]), 1);
-$id_place = $_POST["id_place"];
 
-mysqli_query($link ,"INSERT INTO `places`(`id_user`, `name`, `address`, `coordinates`, `description`) VALUES ('{$_SESSION['user_id']}','$name','$address','$coords','$desc')");
-
+mysqli_query($link ,"INSERT INTO `places`(`id_user`, `name`, `address`, `coordinates`, `description`) VALUES ('{$_SESSION['user_id']}','$name','$address','$coords','$desc');");
+$query2 = mysqli_query($link ,"SELECT * FROM `places` WHERE 1 ORDER by 1 DESC LIMIT 1");
+$id_place = mysqli_fetch_assoc($query2)["id"];
 foreach($hashtags as $row){
     $hash = trim($row);
     mysqli_query($link ,"INSERT INTO `hashtags`(`id_place`, `hashtag`) VALUES ({$id_place},'#{$hash}')");
