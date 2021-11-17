@@ -687,6 +687,9 @@ input[type="number"]::-webkit-inner-spin-button {
   resize: none;
   outline: none;
 }
+.form_place {
+  margin-bottom: 30px;
+}
 
 /* IMAGE SCALE */
 #clickonGL {
@@ -792,31 +795,53 @@ input[type="number"]::-webkit-inner-spin-button {
   color: #000;
 }
 
-#uploadImagesList {
+/* .upload-img__container{
+
+} */
+
+.upload-img__container {
   list-style: none;
   padding: 0;
 }
 
-#uploadImagesList .item {
+.upload-img__container .item {
   float: left;
   margin-right: 20px;
   margin-bottom: 20px;
   position: relative;
 }
 
-#uploadImagesList .item .img-wrap img {
+.upload-img__container .item .img-wrap img {
   object-fit: cover;
   width: 250px;
   height: 150px;
 }
 
-#uploadImagesList .item .delete-link {
+.upload-img__container .item .delete-link {
   cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
   background: transparent;
   filter: contrast(0.5);
+}
+
+.upload-img__container .item .img-wrap1 img {
+  object-fit: cover;
+  width: 250px;
+  height: 150px;
+}
+
+.upload-img__container .item .img-wrap2 img {
+  object-fit: cover;
+  width: 250px;
+  height: 150px;
+}
+
+.upload-img__container .item .img-wrap3 img {
+  object-fit: cover;
+  width: 250px;
+  height: 150px;
 }
 
 .delete-link img {

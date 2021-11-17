@@ -91,7 +91,7 @@
                                 
             <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
               <i class="material-icons" style="font-size: 40px">attach_file</i>
-              <span class="text_cen text_small">Выберите / Перетащите свои файлы !!!</span>
+              <span class="text_cen text_small">Выберите / Перетащите свои файлы</span>
               <input class="addImages" type="file" id="addImages" multiple="">
             </label>     
                   
@@ -109,7 +109,7 @@
               <input
                 type="text"
                 name="hashtag"
-                placeholder="Хэштеги   Пример: #Липецк#КрасивыйГород"
+                placeholder="#ХэштегМеста"
               />
             </div>
 
@@ -377,5 +377,6 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/image-upload.js"></script>
+    <script src="js/image-upload_add.js"></script>
   </body>
 </html>

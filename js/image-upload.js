@@ -5,38 +5,20 @@ var itemPreviewTemplate = imagesList.find(".item.template").clone();
 itemPreviewTemplate.removeClass("template");
 imagesList.find(".item.template").remove();
 
-// $("#addImages").on("change", function () {
-//   var files = this.files;
+$("#addImages").on("change", function () {
+  var files = this.files;
 
-//   for (var i = 0; i < files.length; i++) {
-//     var file = files[i];
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
 
-//     if (!file.type.match(/image\/(jpeg|jpg|png|gif|webp)/)) {
-//       alert("Фотография должна быть в формате jpg, png, webp или gif");
-//       continue;
-//     }
-//     preview(files[i]);
-//   }
-
-//   this.value = "";
-// });
-
-document.querySelectorAll(".addImages").forEach((item) => {
-  item.addEventListener("change", function () {
-    var files = this.files;
-
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-
-      if (!file.type.match(/image\/(jpeg|jpg|png|gif|webp)/)) {
-        alert("Фотография должна быть в формате jpg, png, webp или gif");
-        continue;
-      }
-      preview(files[i]);
+    if (!file.type.match(/image\/(jpeg|jpg|png|gif|webp)/)) {
+      alert("Фотография должна быть в формате jpg, png, webp или gif");
+      continue;
     }
+    preview(files[i]);
+  }
 
-    this.value = "";
-  });
+  this.value = "";
 });
 
 var dropbox;
