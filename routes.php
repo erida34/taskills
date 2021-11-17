@@ -128,27 +128,7 @@
                 }
             ?>
                 <div class="container">
-                    <form action="" class="form-search">
-                        <input id="inp-search" type="text" placeholder="Поиск места" class="text_small input-search" />
-                        <button type="submit" class="flex flex-cen btn btn-search">
-                            <img src="images/icons/search1.png" />
-                        </button>
-                    </form>
-                    <select class="select-css" id="selec">
-                        <option>#</option>
-                        <?php
-                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
-                            foreach($query4 as $row){
-                                echo '<option>'.$row["hashtag"].'</option>';
-                            }
-                        ?>
-                    </select>
-                    <?php
-                        $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
-                        foreach($query4 as $row){
-                            echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
-                        }
-                    ?>
+                    
                 </div>
             </section>
             <!-- Section SEARCH -->
@@ -164,13 +144,15 @@
                                     <div class="flex cards-wrapper" id="moi-bl">
                             END;
 
-                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE `id_user`='".intval($_SESSION['user_id'])."';");
+                            $query = mysqli_query($link ,"SELECT DISTINCT `id_marsh`, `marsh-name` FROM `marsh` WHERE `id_user`='{$_SESSION['user_id']}'");
 
                             foreach($query as $row){
-                                $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
+                                $query2 = mysqli_query($link ,"SELECT `id_marsh`, `id_place` FROM `marsh` WHERE `id_marsh`='{$row['id_marsh']}' LIMIT 1");
                                 $data = mysqli_fetch_assoc($query2);
-                                $src = $data['src'];
-                                $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
+                                $query3 = mysqli_query($link ,"SELECT `src`, `id_place` FROM `fotos` WHERE `id_place`='{$data['id_place']}' LIMIT 1");
+                                $data3 = mysqli_fetch_assoc($query3);
+                                $src = $data3['src'];
+                                //$query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
                                         <div class="flex flex-col card">
                                             <img
@@ -179,17 +161,17 @@
                                                 class="card__img"
                                             />
                                             <div class="card__content">
-                                                <h2 class="title_small text_midi card__title">{$row['name']}</h2>
+                                                <h2 class="title_small text_midi card__title">{$row['marsh-name']}</h2>
                                                 <form class="flex flex-cen" action="route.php" method="get">
-                                                    <button type="submit" name="place" value="{$row['id']}" class="text_small text_midi btn btn_more">
+                                                    <button type="submit" name="place" value="{$row['id_marsh']}" class="text_small text_midi btn btn_more">
                                                         Смотреть
                                                     </button>
                                                 </form>
                                                 <span class="text_small text_aver hashtag">
                                         END;
-                                            foreach($query3 as $row){
-                                                echo $row["hashtag"];
-                                            }
+                                            // foreach($query3 as $row){
+                                            //     echo $row["hashtag"];
+                                            // }
                                 echo <<<END
                                         </span>
                                             </div>
@@ -206,13 +188,15 @@
                             END;
 
                             echo '<div class="flex cards-wrapper" id="other-bl">';
-                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE 1;");
+                            $query = mysqli_query($link ,"SELECT DISTINCT `id_marsh`, `marsh-name` FROM `marsh` WHERE 1");
 
                             foreach($query as $row){
-                                $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
+                                $query2 = mysqli_query($link ,"SELECT `id_marsh`, `id_place` FROM `marsh` WHERE `id_marsh`='{$row['id_marsh']}' LIMIT 1");
                                 $data = mysqli_fetch_assoc($query2);
-                                $src = $data['src'];
-                                $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
+                                $query3 = mysqli_query($link ,"SELECT `src`, `id_place` FROM `fotos` WHERE `id_place`='{$data['id_place']}' LIMIT 1");
+                                $data3 = mysqli_fetch_assoc($query3);
+                                $src = $data3['src'];
+                                // $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
                                         <div class="flex flex-col card">
                                         <img
@@ -221,15 +205,15 @@
                                             class="card__img"
                                         />
                                         <div class="card__content">
-                                            <h2 class="title_small text_midi card__title">{$row['name']}</h2>
+                                            <h2 class="title_small text_midi card__title">{$row['marsh-name']}</h2>
                                             <form class="flex flex-cen" action="place.php" method="get">
-                                                <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
+                                                <button type="submit" name="place" value="{$row['id_marsh']}" class="text_small text_aver btn btn_more">Смотреть</button>
                                             </form>
                                             <span class="text_small text_aver hashtag">
                                         END;
-                                                foreach($query3 as $row){
-                                                    echo $row["hashtag"];
-                                                }
+                                                // foreach($query3 as $row){
+                                                //     echo $row["hashtag"];
+                                                // }
                                     echo <<<END
                                     </span>
                                         </div>
@@ -240,29 +224,32 @@
                         }
                         else{
                             echo '<div class="flex cards-wrapper" id="other-bl">';
-                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE 1;");
+                            $query = mysqli_query($link ,"SELECT DISTINCT `id_marsh`, `marsh-name` FROM `marsh` WHERE 1");
 
                             foreach($query as $row){
-                                $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
+                                $query2 = mysqli_query($link ,"SELECT `id_marsh`, `id_place` FROM `marsh` WHERE `id_marsh`='{$row['id_marsh']}' LIMIT 1");
                                 $data = mysqli_fetch_assoc($query2);
-                                $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
+                                $query3 = mysqli_query($link ,"SELECT `src`, `id_place` FROM `fotos` WHERE `id_place`='{$data['id_place']}' LIMIT 1");
+                                $data3 = mysqli_fetch_assoc($query3);
+                                $src = $data3['src'];
+                                // $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
                                         <div class="flex flex-col card">
                                         <img
-                                            src="{$data['src']}"
+                                            src="{$src}"
                                             alt="img"
                                             class="card__img"
                                         />
                                         <div class="card__content">
-                                            <h2 class="title_small text_midi card__title">{$row['name']}</h2>
-                                            <form action="place.php" method="get">
-                                                <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
+                                            <h2 class="title_small text_midi card__title">{$row['marsh-name']}</h2>
+                                            <form class="flex flex-cen" action="place.php" method="get">
+                                                <button type="submit" name="place" value="{$row['id_marsh']}" class="text_small text_aver btn btn_more">Смотреть</button>
                                             </form>
                                             <span class="text_small text_aver hashtag">
                                         END;
-                                                foreach($query3 as $row){
-                                                    echo $row["hashtag"];
-                                                }
+                                                // foreach($query3 as $row){
+                                                //     echo $row["hashtag"];
+                                                // }
                                     echo <<<END
                                     </span>
                                         </div>
