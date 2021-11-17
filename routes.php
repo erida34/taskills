@@ -45,10 +45,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
-        <title>Места</title>
+        <title>Маршруты</title>
     </head>
     <body>
-        <header>
+    <header>
             <!-- Section MENU -->
             <section class="section section_menu">
                 <nav class="container">
@@ -61,7 +61,7 @@
                             <?php
                                 if(isset($_SESSION["user_id"])){
                                     echo <<<END
-                                    <button class="menu__link text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
+                                    <button class="btn btn_menu-last text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
                                     <ul class="drop-menu">
                                         <li class="btn_menu btn_change-pass" id="smena">
                                             <img src="images/icons/key.png" alt="" class="btn_menu__img">
@@ -76,7 +76,7 @@
                                 }
                                 else{
                                     echo <<<END
-                                    <button class="menu__link text_aver btn btn_acc">Аккаунт</button>
+                                    <button class="menu__link text_aver btn btn_acc btn_menu-last">Аккаунт</button>
                                     END;
                                 }
                             ?>
@@ -92,16 +92,16 @@
                     echo <<<END
                         <section class="section section_top">
                             <div class="container">
-                                <div class="tabs tabs_sec-menu flex">
+                                <div class="tabs tabs_sec-menu">
                                     <!-- Кнопки -->
-                                    <ul class="flex tabs-nav flex tabs-nav_sec-menu">
-                                        <li class="tab-nav_sec-menu"><a id="mestamoi" href="#my-cards">Мои маршруты</a></li>
+                                    <ul class="flex tabs-nav mb-20 tabs-nav_sec-menu">
+                                        <li class="tab-nav_sec-menu"><a id="mestamoi" href="#my-cards">Мои места</a></li>
                                         <li class="tab-nav_sec-menu"><a id="ostalnye" href="#other">Обзор</a></li>
                                     </ul>
-                                    <!-- <div class="flex flex-cen tab-nav_sec-menu"> -->
-                                    <form action="add-place.php">
-                                        <button class="flex flex-cen btn_add-place">
-                                            <span> Добавить</span>
+                                </div>
+                                <form action="add-place.php">
+                                        <button class="flex flex-cen btn btn_add-place">
+                                            <span>Добавить место</span>
                                             <svg width="22" height="22" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <g>
@@ -117,15 +117,16 @@
                                             </svg>
                                         </button>
                                     </form>
-                                        <!-- </div> -->
-                                </div>
                             </div>
                         </section>
+                        <!-- Section SEARCH -->
+                        <section class="section section_mini-top">
                         END;
                 }
+                else{
+                    echo '<section class="section section_top">';
+                }
             ?>
-            <!-- Section SEARCH -->
-            <section class="section section_top">
                 <div class="container">
                     <form action="" class="form-search">
                         <input id="inp-search" type="text" placeholder="Поиск места" class="text_small input-search" />
@@ -183,12 +184,12 @@
                                                 <p class="text_small card__descr">
                                                     {$desc}
                                                 </p>
-                                                <form action="route.php" method="get">
+                                                <form class="flex flex-cen" action="route.php" method="get">
                                                     <button type="submit" name="place" value="{$row['id']}" class="text_small text_midi btn btn_more">
                                                         Смотреть
                                                     </button>
                                                 </form>
-                                                <span class="text_small text_midi hashtag">
+                                                <span class="text_small text_aver hashtag">
                                         END;
                                             foreach($query3 as $row){
                                                 echo $row["hashtag"];
@@ -229,10 +230,10 @@
                                             <p class="text_small card__descr">
                                             {$desc}
                                             </p>
-                                            <form action="place.php" method="get">
+                                            <form class="flex flex-cen" action="place.php" method="get">
                                                 <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
                                             </form>
-                                            <span class="text_small text_midi hashtag">
+                                            <span class="text_small text_aver hashtag">
                                         END;
                                                 foreach($query3 as $row){
                                                     echo $row["hashtag"];
@@ -269,7 +270,7 @@
                                             <form action="place.php" method="get">
                                                 <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
                                             </form>
-                                            <span class="text_small text_midi hashtag">
+                                            <span class="text_small text_aver hashtag">
                                         END;
                                                 foreach($query3 as $row){
                                                     echo $row["hashtag"];

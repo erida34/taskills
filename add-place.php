@@ -13,44 +13,38 @@
     <header>
       <!-- Section MENU -->
       <section class="section section_menu">
-        <nav class="container">
-          <ul class="flex menu">
-            <li>
-              <a class="menu__link menu__link_r text_aver" href="index.php"
-                >Места</a
-              >
-              <a class="menu__link text_aver" href="route.php">Маршруты</a>
-            </li>
-            <li>
-            <?php
-            include_once("db.php");
-            $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
-            $userdata = mysqli_fetch_assoc($query);
-            $login = $userdata["login"];
-                                if(isset($_SESSION["user_id"])){
-                                    echo <<<END
-                                    <button class="menu__link text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
-                                    <ul class="drop-menu">
-                                        <li class="btn_menu btn_change-pass" id="smena">
-                                            <img src="images/icons/key.png" alt="" class="btn_menu__img">
-                                            <span class="text_small midi-text">Сменить пароль</span>
-                                        </li>
-                                        <li class="btn_menu btn_exit">
-                                            <img src="images/icons/logout.png" alt="" class="btn_menu__img">
-                                            <span class="text_small midi-text">Выйти</span>
-                                        </li>
-                                    </ul>
-                                    END;
-                                }
-                                else{
-                                    echo <<<END
-                                    <button class="menu__link text_aver btn btn_acc">Аккаунт</button>
-                                    END;
-                                }
-                            ?>
-            </li>
-          </ul>
-        </nav>
+          <nav class="container">
+              <ul class="flex menu">
+                  <li>
+                      <a class="menu__link menu__link_r text_aver" href="index.php">Места</a>
+                      <a class="menu__link text_aver" href="routes.php">Маршруты</a>
+                  </li>
+                  <li>
+                      <?php
+                          if(isset($_SESSION["user_id"])){
+                              echo <<<END
+                              <button class="btn btn_menu-last text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
+                              <ul class="drop-menu">
+                                  <li class="btn_menu btn_change-pass" id="smena">
+                                      <img src="images/icons/key.png" alt="" class="btn_menu__img">
+                                      <span class="text_small midi-text">Сменить пароль</span>
+                                  </li>
+                                  <li class="btn_menu btn_exit">
+                                      <img src="images/icons/logout.png" alt="" class="btn_menu__img">
+                                      <span class="text_small midi-text">Выйти</span>
+                                  </li>
+                              </ul>
+                              END;
+                          }
+                          else{
+                              echo <<<END
+                              <button class="menu__link text_aver btn btn_acc btn_menu-last">Аккаунт</button>
+                              END;
+                          }
+                      ?>
+                  </li>
+              </ul>
+          </nav>
       </section>
       <!-- Section MENU -->
     </header>
@@ -95,11 +89,11 @@
               ></textarea>
             </div>
                                 
-              <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
-                <i class="material-icons" style="font-size: 40px">attach_file</i>
-                  <span class="text_cen text_small">Выберите / Перетащите свои файлы</span>
-                  <input class="" type="file" id="addImages" multiple="">
-              </label>   
+            <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
+              <i class="material-icons" style="font-size: 40px">attach_file</i>
+              <span class="text_cen text_small">Выберите / Перетащите свои файлы !!!</span>
+              <input class="addImages" type="file" id="addImages" multiple="">
+            </label>     
                   
               <ul class="flex upload-img__container" id="uploadImagesList">
                   <li class="item template">

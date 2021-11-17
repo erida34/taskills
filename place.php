@@ -39,8 +39,7 @@
   </head>
   <body>
     <header>
-      <header>
-        <!-- Section MENU -->
+            <!-- Section MENU -->
             <section class="section section_menu">
                 <nav class="container">
                     <ul class="flex menu">
@@ -52,7 +51,7 @@
                             <?php
                                 if(isset($_SESSION["user_id"])){
                                     echo <<<END
-                                    <button class="menu__link text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
+                                    <button class="btn btn_menu-last text_aver drop-menu__link">$login <img src="images/icons/arrow-down.png" alt="" class="menu__arrow" /></button>
                                     <ul class="drop-menu">
                                         <li class="btn_menu btn_change-pass" id="smena">
                                             <img src="images/icons/key.png" alt="" class="btn_menu__img">
@@ -67,16 +66,15 @@
                                 }
                                 else{
                                     echo <<<END
-                                    <button class="menu__link text_aver btn btn_acc">Аккаунт</button>
+                                    <button class="menu__link text_aver btn btn_acc btn_menu-last">Аккаунт</button>
                                     END;
                                 }
                             ?>
                         </li>
                     </ul>
                 </nav>
-            </section> 
-        <!-- Section MENU -->
-      </header>
+            </section>
+            <!-- Section MENU -->
     </header>
     <main>
       <!-- Section CARDS -->
