@@ -169,7 +169,6 @@
                             foreach($query as $row){
                                 $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
                                 $data = mysqli_fetch_assoc($query2);
-                                $desc = mb_strimwidth($row['description'], 0, 50, "...");
                                 $src = $data['src'];
                                 $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
@@ -181,9 +180,6 @@
                                             />
                                             <div class="card__content">
                                                 <h2 class="title_small text_midi card__title">{$row['name']}</h2>
-                                                <p class="text_small card__descr">
-                                                    {$desc}
-                                                </p>
                                                 <form class="flex flex-cen" action="route.php" method="get">
                                                     <button type="submit" name="place" value="{$row['id']}" class="text_small text_midi btn btn_more">
                                                         Смотреть
@@ -215,7 +211,6 @@
                             foreach($query as $row){
                                 $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
                                 $data = mysqli_fetch_assoc($query2);
-                                $desc = mb_strimwidth($row['description'], 0, 50, "...");
                                 $src = $data['src'];
                                 $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
@@ -227,9 +222,6 @@
                                         />
                                         <div class="card__content">
                                             <h2 class="title_small text_midi card__title">{$row['name']}</h2>
-                                            <p class="text_small card__descr">
-                                            {$desc}
-                                            </p>
                                             <form class="flex flex-cen" action="place.php" method="get">
                                                 <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
                                             </form>
@@ -253,7 +245,6 @@
                             foreach($query as $row){
                                 $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
                                 $data = mysqli_fetch_assoc($query2);
-                                $desc = mb_strimwidth($row['description'], 0, 50, "...");
                                 $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
                                         <div class="flex flex-col card">
@@ -264,9 +255,6 @@
                                         />
                                         <div class="card__content">
                                             <h2 class="title_small text_midi card__title">{$row['name']}</h2>
-                                            <p class="text_small card__descr">
-                                            {$desc}
-                                            </p>
                                             <form action="place.php" method="get">
                                                 <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
                                             </form>
