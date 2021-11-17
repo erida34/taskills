@@ -163,7 +163,7 @@
                                             <div class="card__content">
                                                 <h2 class="title_small text_midi card__title">{$row['marsh-name']}</h2>
                                                 <form class="flex flex-cen" action="route.php" method="get">
-                                                    <button type="submit" name="place" value="{$row['id_marsh']}" class="text_small text_midi btn btn_more">
+                                                    <button type="submit" name="marsh" value="{$row['id_marsh']}" class="text_small text_midi btn btn_more">
                                                         Смотреть
                                                     </button>
                                                 </form>
@@ -206,9 +206,11 @@
                                         />
                                         <div class="card__content">
                                             <h2 class="title_small text_midi card__title">{$row['marsh-name']}</h2>
-                                            <form class="flex flex-cen" action="place.php" method="get">
-                                                <button type="submit" name="place" value="{$row['id_marsh']}" class="text_small text_aver btn btn_more">Смотреть</button>
-                                            </form>
+                                            <form class="flex flex-cen" action="route.php" method="get">
+                                                    <button type="submit" name="marsh" value="{$row['id_marsh']}" class="text_small text_midi btn btn_more">
+                                                        Смотреть
+                                                    </button>
+                                                </form>
                                             <span class="text_small text_aver hashtag">
                                         END;
                                                 // foreach($query3 as $row){
@@ -242,9 +244,11 @@
                                         />
                                         <div class="card__content">
                                             <h2 class="title_small text_midi card__title">{$row['marsh-name']}</h2>
-                                            <form class="flex flex-cen" action="place.php" method="get">
-                                                <button type="submit" name="place" value="{$row['id_marsh']}" class="text_small text_aver btn btn_more">Смотреть</button>
-                                            </form>
+                                            <form class="flex flex-cen" action="route.php" method="get">
+                                                    <button type="submit" name="marsh" value="{$row['id_marsh']}" class="text_small text_midi btn btn_more">
+                                                        Смотреть
+                                                    </button>
+                                                </form>
                                             <span class="text_small text_aver hashtag">
                                         END;
                                                 // foreach($query3 as $row){
