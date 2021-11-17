@@ -118,7 +118,7 @@ $(".user-actions_red").click(function () {
   ).insertAfter(".place__content");
 
   $(
-    '<button class="text_midi btn btn_add-place swap-search" type="submit">Сохранить</button> <button class="btn btn_add-place btn_cancel" type="submit">Отменить</button>'
+    '<button class="text_midi btn btn_add-place swap-search" id="save_edit" type="button">Сохранить</button> <button class="btn btn_add-place btn_cancel" type="submit">Отменить</button>'
   ).insertAfter(".upload-img__container");
 
   // Добавляем форму на страницу
@@ -214,7 +214,6 @@ $(".user-actions_red").click(function () {
       queue[file.name] = file;
     });
     reader.readAsDataURL(file);
-    new_imgs.push(file);
   }
 
   // Удаление фотографий
