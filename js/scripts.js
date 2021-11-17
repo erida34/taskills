@@ -123,7 +123,7 @@ $(".user-actions_red").click(function () {
 
   // Добавляем форму на страницу
   $(".section_place").prepend(
-    '<form method="post" class="container add-form" action="edit_place.php"></form>'
+    '<form method="post" name="edit" class="container add-form"></form>'
   );
 
   // Превращаем блок в форму и удаляем лишнее
@@ -198,7 +198,6 @@ $(".user-actions_red").click(function () {
 
     this.value = "";
   }
-
   // Создание превью
   function preview(file) {
     var reader = new FileReader();
@@ -211,7 +210,7 @@ $(".user-actions_red").click(function () {
       itemPreview.data("id", file.name);
 
       imagesList.append(itemPreview);
-
+      new_imgs.push(event.target.result);
       queue[file.name] = file;
     });
     reader.readAsDataURL(file);
@@ -249,7 +248,26 @@ $(".user-actions_red").click(function () {
       imagesList.append(itemPreview);
     }
   }
-
+  $("#save_edit").click(function () {
+    var formi = new FormData(document.forms.edit);
+    $.ajax({
+      type: "POST",
+      url: "edit_place.php",
+      data: {
+        name: formi.get("placename"),
+        address: formi.get("address"),
+        coord: formi.get("coord"),
+        descr: formi.get("descr"),
+        hashtag: formi.get("hashtag"),
+        addimg: new_imgs,
+        delimg: del_imgs,
+        id_place: formi.get("id_place"),
+      },
+      success: function (result) {
+        location.reload();
+      },
+    });
+  });
   $(".place__images").remove();
   //------------------------------
   //
