@@ -1,10 +1,10 @@
 <?php
-    
+
 	include_once("db.php");
 	if(isset($_SESSION['user_id'])){
         $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
         $userdata = mysqli_fetch_assoc($query);
-        
+
     }
 
     if(isset($_SESSION['user_id'])){
@@ -29,6 +29,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="icon" href="images/icons/favicon.jpg" type="image/x-icon">
      <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Места</title>
@@ -133,11 +134,13 @@
             </div>
             <p class="text_aver mb-10">
               Добавьте карту маршрута используя сервис Яндекс.Карты
-              <svg title='' class="tooltip__marker" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="tooltip" tabindex="0" aria-label="Тултип подробнее">
-                          <path class="tooltip__border" d="M15.5 8C15.5 12.1421 12.1421 15.5 8 15.5C3.85786 15.5 0.5 12.1421 0.5 8C0.5 3.85786 3.85786 0.5 8 0.5C12.1421 0.5 15.5 3.85786 15.5 8Z" stroke="#9D5CD0"/>
-                          <path class="tooltip__simbol" d="M7.26154 6.4551H8.73846V13H7.26154V6.4551ZM8 4.90259C7.71282 4.90259 7.4718 4.81126 7.27692 4.62861C7.09231 4.44597 7 4.22273 7 3.9589C7 3.69508 7.09231 3.47184 7.27692 3.28919C7.4718 3.0964 7.71282 3 8 3C8.28718 3 8.52308 3.09132 8.70769 3.27397C8.90256 3.44647 9 3.66464 9 3.92846C9 4.20243 8.90256 4.43582 8.70769 4.62861C8.52308 4.81126 8.28718 4.90259 8 4.90259Z" fill="black"/>
-              </svg>
             </p>
+            <div class="hint mb-20">
+              <p class="text_small">Шаг 1. Перейдите на сайт Яндекс.Карты: <span class="text_midi"> https://yandex.ru/maps.</span> </p>
+              <p class="text_small">Шаг 2. Заполните поля <span class="text_midi">"Откуда"</span>, <span class="text_midi">"Куда"</span> и <span class="text_midi">"Промежуточная точка"</span> (если более 2х мест в маршруте). </p>
+              <p class="text_small">Шаг 3. Поделитесь картой нажав в правом верхнем углу ссылку <span class="text_midi">"Поделиться".</span> </p>
+              <p class="text_small">Шаг 4. Скопируйте ссылку из поля <span class="text_midi">"Виджет с картой"</span></p>
+            </div>
 
             <div class="flex input-box input-box_add">
               <input
@@ -163,7 +166,7 @@
           <div class="tabs tabs_acc">
             <!-- Кнопки -->
             <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
-              <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+              <li class="tab-nav_acc"><a href="#log" class="active">Авторизация</a></li>
               <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
             </ul>
 
@@ -188,7 +191,7 @@
                     </div>
                     <div class="flex input-box">
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         maxlength="20"
                         class="password_input"
@@ -224,7 +227,7 @@
                     </div>
                     <div class="flex input-box">
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         minlength="3"
                         maxlength="20"
@@ -372,19 +375,5 @@
     </footer>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>
-    <!-- Development -->
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-
-    <!-- Production -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
-
-    <script>  
-      tippy('#tooltip', {
-        content: 'Шаг 1. Перейдите на сайт Яндекс.Карты: https://yandex.ru/maps. Шаг 2. Заполните поля "Откуда", "Куда" и "Промежуточная точка" (если более 2х мест в маршруте). Шаг 3. Поделитесь картой нажав в правом верхнем углу ссылку "Поделиться". Шаг 4. Скопируйте ссылку из поля "Виджет с картой"',
-        maxWidth: 250,
-      });
-    </script>
   </body>
 </html>

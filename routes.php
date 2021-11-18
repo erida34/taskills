@@ -1,5 +1,5 @@
 <?php
-    
+
 	include_once("db.php");
     if(isset($_POST["exit"])){
         unset($_SESSION['user_id']);
@@ -26,7 +26,7 @@
         if($data['password'] === md5(md5($_POST['password']))){
             $user_id = $data['id'];
             $_SESSION['user_id'] = $user_id;
-            
+
 			// if($data["verification"] == 0){
 			//     header("Location: verification.php"); exit();
 			// }
@@ -43,6 +43,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" href="images/icons/favicon.jpg" type="image/x-icon">
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
         <title>Маршруты</title>
@@ -65,7 +66,7 @@
                                     <ul class="drop-menu">
                                         <li class="btn_menu btn_change-pass" id="smena">
                                             <img src="images/icons/key.png" alt="" class="btn_menu__img">
-                                            <span class="text_small midi-text">Сменить пароль</span>
+                                            <span class="text_small midi-text">Изменить пароль</span>
                                         </li>
                                         <li class="btn_menu btn_exit">
                                             <img src="images/icons/logout.png" alt="" class="btn_menu__img">
@@ -128,7 +129,7 @@
                 }
             ?>
                 <div class="container">
-                    
+
                 </div>
             </section>
             <!-- Section SEARCH -->
@@ -183,8 +184,8 @@
                                 </div>
 
                                 <div class="tabs-item tab_sec-menu" id="other">
-                                    
-                                
+
+
                             END;
 
                             echo '<div class="flex cards-wrapper" id="other-bl">';
@@ -278,13 +279,13 @@
                     <div class="tabs tabs_acc">
                         <!-- Кнопки -->
                         <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
-                            <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+                            <li class="tab-nav_acc"><a href="#log" class="active">Авторизация</a></li>
                             <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
                         </ul>
 
                         <!-- Контент -->
                         <div class="tabs-items tabs_acc" id="wind_log_reg">
-                            <div class="tabs-item tabs_acc" id="log">
+                            <div class="tabs-item tab_acc" id="log">
                                 <form method="post" action="index.php" class="flex flex-col flex-cen modal_form modal_form_reg">
                                     <div class="input-box-wrapper input-box-wrapper_log">
                                         <div class="flex input-box">
@@ -299,7 +300,7 @@
                                         </div>
                                         <div class="flex input-box">
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 maxlength="20"
                                                 class="password_input"
@@ -313,7 +314,7 @@
                                     </button>
                                 </form>
                             </div>
-                            <div class="tabs-item tabs_acc" id="reg">
+                            <div class="tabs-item tab_acc" id="reg">
                                 <form name="reg" method="POST" class="flex flex-col flex-cen modal_form">
                                     <div class="input-box-wrapper">
                                         <div class="flex input-box">
@@ -327,7 +328,7 @@
                                         </div>
                                         <div class="flex input-box">
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 minlength="3"
                                                 maxlength="20"
@@ -375,7 +376,7 @@
                     <button class="btn_close">
                         <img src="images/icons/close.png" />
                     </button>
-                    <p class="text_midi title_middle mb-20 modal__title">Сменить пароль</p>
+                    <p class="text_midi title_middle mb-20 modal__title">Изменить пароль</p>
                     <form class="flex flex-col flex-cen modal_form" method="post" action="smena.php">
                         <div class="input-box-wrapper">
                             <div class="flex input-box input-box_change">
@@ -394,7 +395,7 @@
                             </div>
                         </div>
                         <button type="submit" name="submit" class="btn mb-20 btn_change text_small text_midi disabled">
-                            Сменить
+                            Изменить
                         </button>
                     </form>
                 </div>

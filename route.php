@@ -1,10 +1,10 @@
 <?php
-    
+
 	include_once("db.php");
 	if(isset($_SESSION['user_id'])){
         $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
         $userdata = mysqli_fetch_assoc($query);
-        
+
     }
 
     if(isset($_SESSION['user_id'])){
@@ -30,6 +30,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
+      	<link rel="icon" href="images/icons/favicon.jpg" type="image/x-icon">
         <title>Какое-то конкретный маршрут</title>
     </head>
     <body>
@@ -50,7 +51,7 @@
                                     <ul class="drop-menu">
                                         <li class="btn_menu btn_change-pass" id="smena">
                                             <img src="images/icons/key.png" alt="" class="btn_menu__img">
-                                            <span class="text_small midi-text">Сменить пароль</span>
+                                            <span class="text_small midi-text">Изменить пароль</span>
                                         </li>
                                         <li class="btn_menu btn_exit">
                                             <img src="images/icons/logout.png" alt="" class="btn_menu__img">
@@ -79,60 +80,70 @@
             <!-- Section CARDS -->
             <section class="section section_top">
                 <div class="container">
+                  <?php 
+                  		$query2 = mysqli_query($link ,"SELECT * FROM `marsh` WHERE `id_marsh`='".intval($_GET["marsh"])."'");
+                  		$data2 = mysqli_fetch_array($query2);
+                  ?>
                     <div class="flex flex-cen mb-20">
-                        <h1 class="title_biggest text_aver route__name">Памятный маршрут</h1>
+                        <h1 class="title_biggest text_aver route__name"><?php echo $data2["marsh-name"]; ?></h1>
                     </div>
 
                     <div class="title_small info mb-20">Информация</div>
-
+					
+                  	<?php 
+                  foreach($query2 as $row){
+                  	$query3 = mysqli_query($link ,"SELECT * FROM `places` WHERE `id`='".intval($row["id_place"])."'");
+                  	$data3 = mysqli_fetch_assoc($query3);
+                    
+                    echo <<<END
                     <div class="flex flex-col route__place-block mb-20">
-                        <h2 class="title_big text_aver place__name mb-10">Памятное место 1</h2>
+                        <h2 class="title_big text_aver place__name mb-10">{$data3["name"]}</h2>
                         <div class="place__info-block">
                             <span class="text_aver place__info-prew">Адрес:</span>
-                            <span class="place__adress">г. Липецк, ул.Терешковой 22/4</span>
+                            <span class="place__adress">{$data3["address"]}</span>
                         </div>
                         <div class="place__info-block place__info-block_sep">
                             <span class="text_aver place__info-prew">Координаты:</span>
-                            <span class="text_midi place__coord">52.614425, 39.568686</span>
+                            <span class="text_midi place__coord">{$data3["coordinates"]}</span>
                         </div>
                         <div class="place__info-block">
                             <span class="flex text_aver title_small mb-10">Описание</span>
                             <p class="text__descr mb-10">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ab quibusdam a explicabo
-                                fuga, unde nesciunt veniam autem ipsam odit excepturi cumque inventore, nam molestiae
-                                illo voluptas beatae, sunt molestias! Distinctio, numquam cum velit consequuntur
-                                repellendus quod ipsa incidunt aspernatur provident dignissimos. Cupiditate eaque aut
-                                nihil quisquam vel iure, magni hic distinctio ipsum, vitae placeat pariatur repellendus,
-                                dignissimos harum beatae? Qui eum ex incidunt adipisci quos in.
+                                {$data3["description"]}
                             </p>
-
-                            <p class="text__descr mb-10">
-                                Laborum dolorum quisquam iusto illum eius laboriosam quis quae eaque porro voluptatem!
-                                Corrupti ut eius tempore animi delectus amet rerum neque voluptas facere! Consequuntur
-                                commodi veniam dicta culpa fuga assumenda odio nesciunt. Porro quod reprehenderit
-                                tempora, rem qui velit obcaecati dignissimos impedit alias, officia esse amet. Facere
-                                cumque rem ullam molestiae suscipit aperiam! Dignissimos suscipit possimus, ex earum
-                                officia libero ab unde, voluptatibus dolores similique nulla doloribus dolorem? Corporis
-                                quidem repudiandae earum, ex odio itaque laboriosam mollitia odit doloribus
-                                reprehenderit corrupti nobis sed.
-                            </p>
-                            <div class="text_small text_midi hashtag hashtag_midi">#Звёздный</div>
+                            <div class="text_small text_midi hashtag hashtag_midi">
+                    END;
+                            $query5 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$data3["id"]}'");
+                                foreach($query5 as $row1){
+                                    echo $row1["hashtag"];
+                                }
+                    echo <<<END
+                    
+                    </div>
                         </div>
 
                         <div class="flex route__images">
-                            <img
-                                src="http://kassamix.ru/assets/images/resources/1191/zvezdny-na-glavnoi.jpg"
+                    END;
+                    $query = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='".intval($data3["id"])."'");
+                            foreach($query as $row3){
+                                $src = $row3["src"];
+                                echo <<<END
+                                <img
+                                src="{$src}"
                                 alt=""
                                 class="route__img imgonclick"
-                            />
-                            <img
-                                src="https://vesti-lipetsk.ru/images/news/2019/10/3/proekt1_1.jpg"
-                                alt=""
-                                class="route__img imgonclick"
-                            />
+                                  />
+                                END; }
+                    echo <<<END
+                            
                         </div>
                     </div>
-                    <div class="flex flex-col route__place-block mb-20">
+                    END;
+                  } 
+                  		
+                  ?>
+                    
+<!--                     <div class="flex flex-col route__place-block mb-20">
                         <h2 class="title_big text_aver place__name mb-10">Памятное место 2</h2>
                         <div class="place__info-block">
                             <span class="text_aver place__info-prew">Адрес:</span>
@@ -223,20 +234,8 @@
                                 alt=""
                                 class="route__img imgonclick"
                             />
-                        </div>
-                    </div>
-                    <div class="route_map">
-                        <!-- Если карта есть, то вывести её здесь -->
-                        <div style="position:relative;overflow:hidden;">
-                            <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">
-                            Яндекс.Карты
-                            </a>
-                            <a href="https://yandex.ru/maps/?ll=45.486366%2C52.842445&mode=routes&rtext=52.608826%2C39.599229~52.721295%2C41.452750~53.195878%2C50.100202&rtt=auto&ruri=ymapsbm1%3A%2F%2Fgeo%3Fll%3D39.599%252C52.609%26spn%3D0.431%252C0.226%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%259B%25D0%25B8%25D0%25BF%25D0%25B5%25D1%2586%25D0%25BA~~ymapsbm1%3A%2F%2Fgeo%3Fll%3D50.100%252C53.196%26spn%3D0.658%252C0.459%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%25A1%25D0%25B0%25D0%25BC%25D0%25B0%25D1%2580%25D0%25B0&utm_medium=mapframe&utm_source=maps&z=5.87" style="color:#eee;font-size:12px;position:absolute;top:14px;">
-                            Яндекс.Карты</a>
-                            <iframe src="https://yandex.ru/map-widget/v1/-/CCUuy6syoD" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;">
-                            </iframe>
-                        </div>
-                    </div>
+                        </div> 
+                    </div>-->
                 </div>
             </section>
             <!-- Section CARDS -->
@@ -252,7 +251,7 @@
                     <div class="tabs tabs_acc">
                         <!-- Кнопки -->
                         <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
-                            <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+                            <li class="tab-nav_acc"><a href="#log" class="active">Авторизация</a></li>
                             <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
                         </ul>
 
@@ -273,7 +272,7 @@
                                         </div>
                                         <div class="flex input-box">
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 maxlength="20"
                                                 class="password_input"
@@ -301,7 +300,7 @@
                                         </div>
                                         <div class="flex input-box">
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 minlength="3"
                                                 maxlength="20"
@@ -351,7 +350,7 @@
                     <button class="btn_close">
                         <img src="images/icons/close.png" />
                     </button>
-                    <p class="text_midi title_middle mb-20 modal__title">Сменить пароль</p>
+                    <p class="text_midi title_middle mb-20 modal__title">Изменить пароль</p>
                     <form class="flex flex-col flex-cen modal_form" method="post" action="smena.php">
                         <div class="input-box-wrapper">
                             <div class="flex input-box input-box_change">
@@ -370,7 +369,7 @@
                             </div>
                         </div>
                         <button type="submit" name="submit" class="btn mb-20 btn_change text_small text_midi disabled">
-                            Сменить
+                            Изменить
                         </button>
                     </form>
                 </div>

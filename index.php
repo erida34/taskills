@@ -1,12 +1,12 @@
 <?php
-    
+
 	include_once("db.php");
     if(isset($_GET["err"])){
         if($_GET["err"] == 3){
             echo "<script>alert('Неправильно введён старый пароль')</script>";
         }
     }
-    
+
     if(isset($_POST["exit"])){
         unset($_SESSION['user_id']);
     }
@@ -32,7 +32,7 @@
         if($data['password'] === md5(md5($_POST['password']))){
             $user_id = $data['id'];
             $_SESSION['user_id'] = $user_id;
-            
+
 			// if($data["verification"] == 0){
 			//     header("Location: verification.php"); exit();
 			// }
@@ -49,6 +49,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="images/icons/favicon.jpg" type="image/x-icon">
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
         <title>Места</title>
@@ -60,8 +61,8 @@
                 <nav class="container">
                     <ul class="flex menu">
                         <li>
-                            <a class="menu__link menu__link_r text_aver" href="index.php">Места</a>
-                            <a class="menu__link text_aver" href="routes.php">Маршруты</a>
+                            <a class="menu__link menu__link_r text_aver hover-green" href="index.php">Места</a>
+                            <a class="menu__link text_aver hover-green" href="routes.php">Маршруты</a>
                         </li>
                         <li>
                             <?php
@@ -71,7 +72,7 @@
                                     <ul class="drop-menu">
                                         <li class="btn_menu btn_change-pass" id="smena">
                                             <img src="images/icons/key.png" alt="" class="btn_menu__img">
-                                            <span class="text_small midi-text">Сменить пароль</span>
+                                            <span class="text_small midi-text">Изменить пароль</span>
                                         </li>
                                         <li class="btn_menu btn_exit">
                                             <img src="images/icons/logout.png" alt="" class="btn_menu__img">
@@ -93,10 +94,7 @@
             <!-- Section MENU -->
         </header>
         <main>
-            <?php
-                if(isset($_SESSION["user_id"])){
-                    echo <<<END
-                        <section class="section section_top">
+            <section class="section section_top">
                             <div class="container">
                                 <div class="tabs tabs_sec-menu">
                                     <!-- Кнопки -->
@@ -106,7 +104,10 @@
                                     </ul>
                                 </div>
                                 <form action="add-place.php">
-                                        <button class="flex flex-cen btn btn_add-place">
+                                  <?php
+                                  if(isset($_SESSION["user_id"])){
+                                  	echo <<<END
+                                    	<button class="flex flex-cen btn btn_add-place">
                                             <span>Добавить место</span>
                                             <svg width="22" height="22" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -122,18 +123,16 @@
                                                 </g>
                                             </svg>
                                         </button>
+                                    END;
+                                  }
+
+                                  ?>
                                     </form>
                             </div>
                         </section>
                         <!-- Section SEARCH -->
                         <section class="section section_mini-top">
-                        END;
-                }
-                else{
-                    echo '<section class="section section_top">';
-                }
-            ?>
-            
+
                 <div class="container">
                     <form action="" class="form-search">
                         <input id="inp-search" type="text" placeholder="Поиск места" class="text_small input-search" />
@@ -148,8 +147,7 @@
             <!-- Section CARDS -->
             <section class="section">
                 <div class="container">
-                
-                <!-- SELECT `hashtags`.`hashtag`, count(*) FROM `hashtags` , `places` , `users` where `hashtags`.`id_place` = `places`.`id` and `places`.`id_user` = `users`.`id` and `users`.`id` = 7 GROUP BY `hashtags`.`hashtag` order by 2 desc; -->
+
                 <?php
                         if(isset($_SESSION["user_id"])){
                             echo '<div class="tabs-items tabs_sec-menu"><div class="tabs-item tab_sec-menu" id="my-cards">';
@@ -163,10 +161,10 @@
                             foreach($query4 as $row){
                                 echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
                             }
-                            
+
                             echo '<div class="flex cards-wrapper" id="moi-bl">';
 
-                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE `id_user`='".intval($_SESSION['user_id'])."';");
+                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE `id_user`='".intval($_SESSION['user_id'])."' order by `id` desc;");
 
                             foreach($query as $row){
                                 $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
@@ -175,7 +173,7 @@
                                 $src = $data['src'];
                                 $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
                                 echo <<<END
-                                        <div class="flex flex-col card">
+                                        <div class="flex flex-col card card-mesto">
                                             <img
                                                 src="{$src}"
                                                 alt=""
@@ -204,18 +202,88 @@
                             }
                             echo <<<END
                                     </div>
+                                    <div class="wrap-allbtn"><button id="AllBtn" class="text_small text_midi btn btn_more">Все места<button></div>
                                 </div>
 
                                 <div class="tabs-item tab_sec-menu" id="other">
-                                    
-                                
+
+
                             END;
 
-                            echo '<select class="select-css" id="selec"><option>#</option>';
-                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
+                            // echo '<select class="select-css" id="selec"><option>#</option>';
+                            // $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
+                            // foreach($query4 as $row){
+                            //     echo '<option>'.$row["hashtag"].'</option>';
+                            // }
+                            // echo '</select>';
+                          	echo "Популярное: &nbsp;&nbsp;&nbsp;&nbsp;";
+                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
                             foreach($query4 as $row){
-                                echo '<option>'.$row["hashtag"].'</option>';
+                                echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
                             }
+
+                            echo '<div class="flex cards-wrapper" id="other-bl">';
+                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE 1 order by `id` desc;");
+
+                            foreach($query as $row){
+                                $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
+                                $data = mysqli_fetch_assoc($query2);
+                                $desc = $row['description'];
+                                $src = $data['src'];
+                                $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
+                                echo <<<END
+                                        <div class="flex flex-col card card-obzor">
+                                        <img
+                                            src="{$src}"
+                                            alt="img"
+                                            class="card__img"
+                                        />
+                                        <div class="card__content">
+                                            <h2 class="title_small text_midi card__title">{$row['name']}</h2>
+                                            <p class="text_small card__descr">
+                                            {$desc}
+                                            </p>
+                                            <form class="flex flex-cen" action="place.php" method="get">
+                                                <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
+                                            </form>
+                                            <span class="text_small text_aver hashtag">
+                                        END;
+                                                foreach($query3 as $row){
+                                                    echo $row["hashtag"];
+                                                }
+                                    echo <<<END
+                                    </span>
+                                        </div>
+                                    </div>
+                                END;
+                            }
+                            echo '
+                            </div><div class="wrap-allbtn"><button id="AllBtn2" class="text_small text_midi btn btn_more">Все места<button></div>
+                            </div></div>';
+                        }
+                        else{
+                            echo '<div class="tabs-items tabs_sec-menu"><div class="tabs-item tab_sec-menu" id="my-cards">';
+
+                            echo <<<END
+                                <div class="flex flex-cen" id="moi-bl">
+                                        <span class="title_small"><center>Авторизуйтесь чтобы иметь возможность добавлять<br> собственные памятные места и маршруты</center>
+                                        </span>
+                                </div>
+                                    </div>
+
+                                <div class="tabs-item tab_sec-menu" id="other">
+
+
+                            END;
+
+                            if(isset($_SESSION["user_id"])){
+                              echo '<select class="select-css" id="selec"><option>#</option>';
+                              $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
+                              foreach($query4 as $row){
+                                  echo '<option>'.$row["hashtag"].'</option>';
+                              }
+                            }
+
                             echo '</select>';
                             $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
                             foreach($query4 as $row){
@@ -259,53 +327,6 @@
                             }
                             echo '</div></div></div>';
                         }
-                        else{
-                            echo '<select class="select-css" id="selec"><option>#</option>';
-                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc");
-                            foreach($query4 as $row){
-                                echo '<option>'.$row["hashtag"].'</option>';
-                            }
-                            echo '</select>';
-                            $query4 = mysqli_query($link ,"SELECT `hashtag`, count(*) FROM `hashtags` GROUP BY `hashtag` order by 2 desc LIMIT 5");
-                            foreach($query4 as $row){
-                                echo '<button class="btn btn_hash swap-search">'.$row["hashtag"].'</button>';
-                            }
-                            echo '<div class="flex cards-wrapper" id="other-bl">';
-                            $query = mysqli_query($link ,"SELECT * FROM `places` WHERE 1;");
-
-                            foreach($query as $row){
-                                $query2 = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='{$row['id']}' LIMIT 1");
-                                $data = mysqli_fetch_assoc($query2);
-                                $desc = $row['description'];
-                                $query3 = mysqli_query($link ,"SELECT * FROM `hashtags` WHERE `id_place`='{$row['id']}'");
-                                echo <<<END
-                                        <div class="flex flex-col card">
-                                        <img
-                                            src="{$data['src']}"
-                                            alt="img"
-                                            class="card__img"
-                                        />
-                                        <div class="card__content">
-                                            <h2 class="title_small text_midi card__title">{$row['name']}</h2>
-                                            <p class="text_small card__descr">
-                                            {$desc}
-                                            </p>
-                                            <form action="place.php" method="get">
-                                                <button type="submit" name="place" value="{$row['id']}" class="text_small text_aver btn btn_more">Смотреть</button>
-                                            </form>
-                                            <span class="text_small text_aver hashtag">
-                                        END;
-                                                foreach($query3 as $row){
-                                                    echo $row["hashtag"];
-                                                }
-                                    echo <<<END
-                                    </span>
-                                        </div>
-                                    </div>
-                                END;
-                            }
-                            echo '</div>';
-                        }
                     ?>
                 </div>
             </section>
@@ -322,13 +343,13 @@
                     <div class="tabs tabs_acc">
                         <!-- Кнопки -->
                         <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
-                            <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+                            <li class="tab-nav_acc"><a href="#log" class="active">Авторизация</a></li>
                             <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
                         </ul>
 
                         <!-- Контент -->
                         <div class="tabs-items tabs_acc" id="wind_log_reg">
-                            <div class="tabs-item tabs_acc" id="log">
+                            <div class="tabs-item tab_acc" id="log">
                                 <form method="post" action="index.php" class="flex flex-col flex-cen modal_form modal_form_reg">
                                     <div class="input-box-wrapper input-box-wrapper_log">
                                         <div class="flex input-box">
@@ -343,7 +364,7 @@
                                         </div>
                                         <div class="flex input-box">
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 maxlength="20"
                                                 class="password_input"
@@ -357,7 +378,7 @@
                                     </button>
                                 </form>
                             </div>
-                            <div class="tabs-item tabs_acc" id="reg">
+                            <div class="tabs-item tab_acc" id="reg">
                                 <form name="reg" method="POST" class="flex flex-col flex-cen modal_form">
                                     <div class="input-box-wrapper">
                                         <div class="flex input-box">
@@ -371,7 +392,7 @@
                                         </div>
                                         <div class="flex input-box">
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 minlength="3"
                                                 maxlength="20"
@@ -422,7 +443,7 @@
                     <button class="btn_close">
                         <img src="images/icons/close.png" />
                     </button>
-                    <p class="text_midi title_middle mb-20 modal__title">Сменить пароль</p>
+                    <p class="text_midi title_middle mb-20 modal__title">Изменить пароль</p>
                     <form class="flex flex-col flex-cen modal_form" method="post" action="smena.php">
                         <div class="input-box-wrapper">
                             <div class="flex input-box input-box_change">
@@ -441,7 +462,7 @@
                             </div>
                         </div>
                         <button type="submit" name="submit" class="btn mb-20 btn_change text_small text_midi disabled">
-                            Сменить
+                            Изменить
                         </button>
                     </form>
                 </div>
@@ -470,6 +491,7 @@
             </section>
         </footer>
         <script src="js/jquery-3.6.0.min.js"></script>
+  		<script src="js/webcam.min.js"></script>
         <script src="js/scripts.js"></script>
     </body>
 </html>

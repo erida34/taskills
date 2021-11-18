@@ -1,5 +1,5 @@
 <?php
-    
+
 	include_once("db.php");
     $place = $_GET["place"];
     $query = mysqli_query($link ,"SELECT * FROM `places` WHERE `id`='".intval($place)."' LIMIT 1");
@@ -33,6 +33,7 @@
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="images/icons/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Какое-то конкретное место</title>
@@ -55,7 +56,7 @@
                                     <ul class="drop-menu">
                                         <li class="btn_menu btn_change-pass" id="smena">
                                             <img src="images/icons/key.png" alt="" class="btn_menu__img">
-                                            <span class="text_small midi-text">Сменить пароль</span>
+                                            <span class="text_small midi-text">Изменить пароль</span>
                                         </li>
                                         <li class="btn_menu btn_exit">
                                             <img src="images/icons/logout.png" alt="" class="btn_menu__img">
@@ -88,9 +89,31 @@
               >
                 <?php echo $data['name']; ?>
               </h1>
-              <button class="user-actions_red">
-                <img src="images/icons/pencil.png" />
-              </button>
+              <?php
+              	if(isset($_GET["place"])){
+                	if(isset($_SESSION["user_id"])){
+                    	$query5 = mysqli_query($link ,"SELECT * FROM `places` WHERE `id`='".intval($place)."' LIMIT 1");
+                      	$data5 = mysqli_fetch_assoc($query5);
+                      if($data5["id_user"] == $_SESSION["user_id"]){
+                      	echo <<<END
+                        <button class="user-actions_red">
+                          <img class="pencil" src="images/icons/edit.png" />
+                          <img class="pencil_active" src="images/icons/edit_hover.png" />
+                        </button>
+                        END;
+                      }
+                      else{
+                      	echo <<<END
+                        <button class="user-actions_repost">
+                          <img class="pencil" src="images/icons/add-button(1).png" />
+                          <img class="pencil_active" src="images/icons/add-button(2).png" />
+                        </button>
+                        END;
+                      }
+                    }
+                }
+              ?>
+              
             </div>
             <div class="mb-20">
               <div class="title_small info mb-20">Информация</div>
@@ -134,9 +157,9 @@
               </div>
             </div>
           </div>
-                                
+
           <!-- Slider main container -->
-          <div class="mb-20 swiper place__images">
+          <div class="swiper place__images">
             <div class="swiper-wrapper">
                           <?php
                             $query = mysqli_query($link ,"SELECT * FROM `fotos` WHERE `id_place`='".intval($place)."'");
@@ -144,13 +167,13 @@
                                 $src = $row["src"];
                                 echo <<<END
                                 <div class="swiper-slide"><img src="$src" alt="img" class="place__img"/></div>
-                          END; } 
-                          ?> 
+                          END; }
+                          ?>
               </div>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination castom-pagination"></div>
+            <div class="swiper-button-next castom-next"></div>
+            <div class="swiper-button-prev castom-prev"></div>
           </div>
         </div>
       </section>
@@ -167,7 +190,7 @@
           <div class="tabs tabs_acc">
             <!-- Кнопки -->
             <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
-              <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+              <li class="tab-nav_acc"><a href="#log" class="active">Авторизация</a></li>
               <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
             </ul>
 
@@ -192,7 +215,7 @@
                     </div>
                     <div class="flex input-box">
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         maxlength="20"
                         class="password_input"
@@ -228,7 +251,7 @@
                     </div>
                     <div class="flex input-box">
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         minlength="3"
                         maxlength="20"
@@ -308,7 +331,7 @@
             <img src="images/icons/close.png" />
           </button>
           <p class="text_midi title_middle mb-20 modal__title">
-            Сменить пароль
+            Изменить пароль
           </p>
           <form
             class="flex flex-col flex-cen modal_form"
@@ -342,7 +365,7 @@
               name="submit"
               class="btn mb-20 btn_change text_small text_midi disabled"
             >
-              Сменить
+              Изменить
             </button>
           </form>
         </div>
@@ -389,6 +412,7 @@
           pagination: {
               el: '.swiper-pagination',
               dynamicBullets: true,
+              clickable: true,
           },
 
           navigation: {

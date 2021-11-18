@@ -1,3 +1,27 @@
+<?php
+
+	include_once("db.php");
+	if(isset($_SESSION['user_id'])){
+        $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
+        $userdata = mysqli_fetch_assoc($query);
+
+    }
+
+    if(isset($_SESSION['user_id'])){
+        $query = mysqli_query($link ,"SELECT * FROM `users` WHERE `id`='".intval($_SESSION['user_id'])."' LIMIT 1");
+        $userdata = mysqli_fetch_assoc($query);
+        // if($userdata["verification"] == 0){
+        //     header("Location: index.php"); exit();
+        // }
+        $_SESSION["login"] = $userdata["login"];
+        $login = $userdata["login"];
+        $email = $userdata["email"];
+        $query = mysqli_query($link ,"SELECT *,COUNT(id) FROM `places` WHERE `id_user`='".intval($_SESSION['user_id'])."' GROUP BY `id`;");
+        $userdata = mysqli_fetch_assoc($query);
+        // $count = $userdata["COUNT(id)"];
+    }
+ ?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -5,9 +29,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="js/webcam.min.js"></script>
+    <link rel="icon" href="images/icons/favicon.jpg" type="image/x-icon">
      <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Места</title>
+    <title>Добавить место</title>
   </head>
   <body>
     <header>
@@ -27,7 +53,7 @@
                               <ul class="drop-menu">
                                   <li class="btn_menu btn_change-pass" id="smena">
                                       <img src="images/icons/key.png" alt="" class="btn_menu__img">
-                                      <span class="text_small midi-text">Сменить пароль</span>
+                                      <span class="text_small midi-text">Изменить пароль</span>
                                   </li>
                                   <li class="btn_menu btn_exit">
                                       <img src="images/icons/logout.png" alt="" class="btn_menu__img">
@@ -53,18 +79,19 @@
       <section class="section section_top">
         <div class="container container_add-place">
           <h1 class="title_biggest text_midi mb-20">Добавить место</h1>
-          <form action="" class="form_place" name="formadd">
+          <form action="" name="formadd" class="form_place">
             <div class="flex input-box input-box_add">
               <input
                 type="text"
                 name="placename"
+                minlength="3"
                 placeholder="Название памятного места"
                 required
               />
             </div>
 
             <div class="flex input-box input-box_add">
-              <input type="text" name="address" placeholder="Адрес" required />
+              <input type="text" name="address" placeholder="Адрес" required minlength="3" />
             </div>
 
             <div class="flex input-box input-box_add input-box_add_short">
@@ -72,6 +99,7 @@
                 type="text"
                 name="coord"
                 placeholder="Координаты"
+                minlength="3"
                 required
               />
               <button type="button" class="find-me btn btn-info btn-block">
@@ -88,13 +116,13 @@
                 required
               ></textarea>
             </div>
-                                
+
             <label class="flex flex-col flex-cen label-load mb-20" id="dropbox">
               <i class="material-icons" style="font-size: 40px">attach_file</i>
               <span class="text_cen text_small">Выберите / Перетащите свои файлы</span>
               <input class="addImages" type="file" id="addImages" multiple="">
-            </label>     
-                  
+            </label>
+
               <ul class="flex upload-img__container" id="uploadImagesList">
                   <li class="item template">
                       <span class="img-wrap">
@@ -104,16 +132,62 @@
                       <button type="button" class="delete-link" title="Удалить"><img src="images/icons/close.png" alt=""></button>
                   </li>
               </ul>
+            
+          	<div id="my_camera" class="flex flex-cen mb-20">
+            </div>
+            <form>
+                <input type="button" class="btn" value="Сделать фото" onClick="take_snapshot()">
+            </form>
+
+              <div id="results" class="mb-20"></div>
 
             <div class="flex input-box input-box_add">
               <input
                 type="text"
                 name="hashtag"
-                placeholder="#Добавить#ХэштегиМеста"
+                placeholder="#ХэштегМеста"
               />
             </div>
 
-            <button class="btn btn_add title_small" type="submit">Добавить</button>
+            <button type="button" class="flex flex-cen btn_add-form mb-20">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="40"
+                height="40"
+                viewBox="0 0 172 172"
+                style="fill: #000000"
+              >
+                <g
+                  fill="none"
+                  fill-rule="nonzero"
+                  stroke="none"
+                  stroke-width="1"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                  stroke-miterlimit="10"
+                  stroke-dasharray=""
+                  stroke-dashoffset="0"
+                  font-family="none"
+                  font-weight="none"
+                  font-size="none"
+                  text-anchor="none"
+                  style="mix-blend-mode: normal"
+                >
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g id="original-icon" fill="#000000">
+                    <path
+                      d="M86,6.88c-43.65603,0 -79.12,35.46397 -79.12,79.12c0,43.65603 35.46397,79.12 79.12,79.12c43.65603,0 79.12,-35.46397 79.12,-79.12c0,-43.65603 -35.46397,-79.12 -79.12,-79.12zM86,13.76c39.93779,0 72.24,32.30221 72.24,72.24c0,39.93779 -32.30221,72.24 -72.24,72.24c-39.93779,0 -72.24,-32.30221 -72.24,-72.24c0,-39.93779 32.30221,-72.24 72.24,-72.24zM85.94625,58.43297c-1.89722,0.02966 -3.41223,1.58976 -3.38625,3.48703v20.64h-20.64c-1.24059,-0.01754 -2.39452,0.63425 -3.01993,1.7058c-0.62541,1.07155 -0.62541,2.39684 0,3.46839c0.62541,1.07155 1.77935,1.72335 3.01993,1.7058h20.64v20.64c-0.01754,1.24059 0.63425,2.39452 1.7058,3.01993c1.07155,0.62541 2.39684,0.62541 3.46839,0c1.07155,-0.62541 1.72335,-1.77935 1.7058,-3.01993v-20.64h20.64c1.24059,0.01754 2.39452,-0.63425 3.01993,-1.7058c0.62541,-1.07155 0.62541,-2.39684 0,-3.46839c-0.62541,-1.07155 -1.77935,-1.72335 -3.01993,-1.7058h-20.64v-20.64c0.01273,-0.92983 -0.35149,-1.82522 -1.00967,-2.48214c-0.65819,-0.65692 -1.55427,-1.01942 -2.48408,-1.00489z"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+              Добавить ещё одно место
+            </button>
+
+            <button id="btn_add" class="btn btn_add title_small" type="button">Добавить</button>
+            <p id="add_msg" class="display-none">Отправка...</p>
           </form>
         </div>
       </section>
@@ -130,7 +204,7 @@
           <div class="tabs tabs_acc">
             <!-- Кнопки -->
             <ul class="flex tabs-nav flex tabs-nav_acc mb-20">
-              <li class="tab-nav_acc"><a href="#log">Авторизация</a></li>
+              <li class="tab-nav_acc"><a href="#log" class="active">Авторизация</a></li>
               <li class="tab-nav_acc"><a href="#reg">Регистрация</a></li>
             </ul>
 
@@ -155,7 +229,7 @@
                     </div>
                     <div class="flex input-box">
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         maxlength="20"
                         class="password_input"
@@ -191,7 +265,7 @@
                     </div>
                     <div class="flex input-box">
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         minlength="3"
                         maxlength="20"
@@ -271,7 +345,7 @@
             <img src="images/icons/close.png" />
           </button>
           <p class="text_midi title_middle mb-20 modal__title">
-            Сменить пароль
+            Изменить пароль
           </p>
           <form
             class="flex flex-col flex-cen modal_form"
@@ -305,7 +379,7 @@
               name="submit"
               class="btn mb-20 btn_change text_small text_midi disabled"
             >
-              Сменить
+              Изменить
             </button>
           </form>
         </div>
@@ -340,5 +414,26 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/image-upload.js"></script>
+	<!-- Code to handle taking the snapshot and displaying it locally -->
+	<script language="JavaScript">
+      // Configure a few settings and attach camera
+      Webcam.start;
+      Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: "jpeg",
+        jpeg_quality: 90,
+      });
+      Webcam.attach("#my_camera");
+      // A button for taking snaps
+
+      function take_snapshot() {
+        Webcam.snap(function (data_uri) {
+          document.getElementById("results").innerHTML =
+            '<img id="imageprev" src="' + data_uri + '"/>';
+          	new_imgs.push(data_uri);
+        });
+      } 
+      </script>
   </body>
 </html>

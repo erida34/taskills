@@ -11,10 +11,10 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     session_start();
 
     // Переменные для подключения к БД
-    $bd_host = 'localhost';
-    $bd_user = 'root';
-    $bd_password = 'root';
-    $bd_name = 'taskills';
+    $bd_host = '78.108.80.33';
+    $bd_user = 'u227548_hak';
+    $bd_password = 'hakaton';
+    $bd_name = 'b227548_hakaton2';
 
     // Подключение к БД
     $link = mysqli_connect($bd_host, $bd_user, $bd_password);

@@ -1,7 +1,32 @@
+	$('#AllBtn').on('click', function() {
+  document.querySelectorAll('.card-mesto').forEach(function(eventCard) {
+    eventCard.classList.toggle("card_active");
+  });
+});
+
+$('#AllBtn2').on('click', function() {
+  document.querySelectorAll('.card-obzor').forEach(function(eventCard) {
+    eventCard.classList.toggle("card_active");
+  });
+});
+
 // Скрипт появления скрытия окна войти / зарегистрироваться
 $(".btn_acc").click(function () {
   $(".modal-wrap_acc").addClass("display-flex");
   $(".modal-window_acc").addClass("display-flex");
+  var tab = $(".tabs_acc > .tab_acc");
+  tab.hide().filter(":first").show();
+
+  $(".tabs-nav_acc a")
+    .click(function () {
+      tab.hide();
+      tab.filter(this.hash).show();
+      $(".tabs .tabs-nav_acc a").removeClass("active");
+      $(this).addClass("active");
+      return false;
+    })
+    .filter(":first")
+    .click();
 });
 
 $(".btn_change-pass").click(function () {
@@ -18,13 +43,15 @@ $(".btn_exit").click(function () {
 $(".btn_close").click(function () {
   $(".modal-wrap").removeClass("display-flex");
   $(".modal-window").removeClass("display-flex");
+  var tab = $(".tabs-items > div");
+  tab.hide().filter(":first").show();
+  $(".tabs-nav a").filter(":first").addClass("active");
 });
 
 // Скрипт перемещения по табам
 $(function () {
   var tab = $(".tabs-items > div");
   tab.hide().filter(":first").show();
-
   // Клики по вкладкам.
   $(".tabs .tabs-nav a")
     .click(function () {
@@ -254,6 +281,8 @@ $(".user-actions_red").click(function () {
     });
   });
   $(".place__images").remove();
+  //------------------------------
+  //
 
   // Скрипт определения геолокации пользователя на странице редактировать
   var findMeButton = $(".find-me");
@@ -287,6 +316,37 @@ if (!navigator.geolocation) {
     });
   });
 }
+
+// if(Webcam){
+
+// Webcam.set({
+//     width: 320,
+//     height: 240,
+//     image_format: 'jpeg',
+//     jpeg_quality: 90
+// });
+// Webcam.attach( '#my_camera' );
+
+
+// const btn = document.querySelector('#btn-snap');
+
+// btn.addEventListener('click', () => {
+//    take_snapshot();
+// })
+
+// function take_snapshot() {
+//     // take snapshot and get image data
+//     Webcam.snap( function(data_uri) {
+//         // display results in page
+//         document.getElementById('results').innerHTML =
+//             `<h2>Here is your image:</h2>
+//             <img src="${data_uri}"/>`;
+//     } );
+// }
+//   function error({ message }) {
+//     console.log(message) // при отказе в доступе получаем PositionError: User denied Geolocation
+//   }
+// }
 
 //btn funcrion
 $("#exit").click(function () {
@@ -417,3 +477,38 @@ $(".btn_hash").click(function () {
     },
   });
 });
+$("#btn_add").click(function () {
+  var formi = new FormData(document.forms.formadd);
+  $("#add_msg").removeClass("display-none");
+  $.ajax({
+    type: "POST",
+    url: "send_place.php",
+    data: {
+      name: formi.get("placename"),
+      address: formi.get("address"),
+      coord: formi.get("coord"),
+      descr: formi.get("descr"),
+      hashtag: formi.get("hashtag"),
+      addimg: new_imgs
+    },
+    success: function (result) {
+      //location.reload();
+      console.log(result);
+      $("#add_msg").text("Отправлено!");
+      document.location.href = "index.php";
+    },
+  });
+});
+$(".user-actions_repost").click(function(){
+  var url = new URL(window.location.href);
+  var idPlace = url.searchParams.get("place");
+  $.ajax({
+    type: "POST",
+    url: "repost.php",
+    data: { place: idPlace },
+    success: function (result) {
+      console.log(result);
+    },
+  });
+
+})
